@@ -1,19 +1,36 @@
 
 
 
-export enum CountActionEnum { INCREASE, DECREASE }
+export enum ConversationActions { CREATE_CONVERSATION, UPDATE_CONVERSATION, DELETE_CONVERSATION }
 
-export type InitialStateType = {
-  count: number
+export enum MessageType { MEDIA, TEXT, REPLY }
+
+export type Message = {
+  _id: string,
+  type: MessageType.MEDIA | MessageType.TEXT | MessageType.REPLY,
+  text: string,
+  date: Date,
+  isSent: boolean,
+  isRead: boolean,
+  isDelivered: boolean,
+  media?: string,
+  replyMessage?: string
 }
+
+export type Conversation = {
+  recipients: string[],
+  messages: Message[]
+}
+
+export type InitialStateType = Conversation[];
 
 export type ConversationsContextPropsType = {
   children: React.ReactNode
 }
 
 export type ReducerActionType = {
-  type: CountActionEnum.INCREASE | CountActionEnum.DECREASE,
-  payload: number
+  type: ConversationActions.CREATE_CONVERSATION | ConversationActions.DELETE_CONVERSATION | ConversationActions.UPDATE_CONVERSATION,
+  payload: Conversation
 }
 
 export type ConversationsContextType = {

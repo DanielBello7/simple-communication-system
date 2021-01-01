@@ -1,7 +1,7 @@
 
 
 
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer } from 'react';
 import {
   ContactsActions, 
   ContactsContextPropsType, 
@@ -9,14 +9,12 @@ import {
   InitialStateType, 
   ReducerActionType 
 } from '../types/ContactsType.type';
-import { DataContext } from './MainContext';
 
 const initialState: InitialStateType = []
 
 const ContactsContext = React.createContext<ContactsContextType>({} as ContactsContextType);
 
 export function ContactsContextProvider(props: ContactsContextPropsType) {
-  const dataContext = useContext(DataContext);
 
   function reducer(state: InitialStateType, action: ReducerActionType) {
     switch(action.type){

@@ -4,22 +4,24 @@
 import React, { useReducer } from 'react';
 import { 
   InitialStateType,
-  CountActionEnum,
+  ConversationActions,
   ConversationsContextPropsType, 
   ReducerActionType, 
   ConversationsContextType
 } from '../types/ConversationTypes.types';
 
-const initialState: InitialStateType = {count: 0}
+const initialState: InitialStateType = []
 
 function reducer(state: InitialStateType, action: ReducerActionType) {
   switch (action.type){
-    case CountActionEnum.INCREASE:
-      return {count: state.count + action.payload}
-    case CountActionEnum.DECREASE:
-      return {count: state.count - action.payload}
+    case ConversationActions.CREATE_CONVERSATION:
+      return [...state, {...action.payload}];
+    case ConversationActions.DELETE_CONVERSATION:
+      return [...state];
+    case ConversationActions.UPDATE_CONVERSATION:
+      return [...state];
     default:
-      return state;
+      return [...state];
   }
 }
 
