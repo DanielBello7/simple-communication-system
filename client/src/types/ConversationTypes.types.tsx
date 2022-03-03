@@ -10,6 +10,8 @@ export type Message = {
   type: MessageType.MEDIA | MessageType.TEXT | MessageType.REPLY,
   text: string,
   date: Date,
+  time: Date,
+  sender: string | {},
   isSent: boolean,
   isRead: boolean,
   isDelivered: boolean,
@@ -35,5 +37,6 @@ export type ReducerActionType = {
 
 export type ConversationsContextType = {
   state: InitialStateType,
-  dispatch: React.Dispatch<ReducerActionType>
+  dispatch: React.Dispatch<ReducerActionType>,
+  formattedConversations: Conversation[]
 }

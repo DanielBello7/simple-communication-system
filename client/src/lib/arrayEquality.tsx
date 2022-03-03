@@ -1,7 +1,7 @@
 
 
 
-export default function arrayEquality(a: {}[], b: {}[]): boolean {
+export default function arrayEquality<T>(a: T[], b: T[]): boolean {
   if (a.length !== b.length) return false;
   a.sort();
   b.sort();

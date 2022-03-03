@@ -18,11 +18,11 @@ function App() {
   const dataContext = useContext(DataContext);
   const dashboard = (
     <SocketContextProvider>
-    <ConversationsContextProvider>
     <ContactsContextProvider>
+    <ConversationsContextProvider>
       <Dashboard />
-    </ContactsContextProvider>
     </ConversationsContextProvider>
+    </ContactsContextProvider>
     </SocketContextProvider>
   );
 

@@ -12,7 +12,7 @@ import {
 
 const initialState: InitialStateType = []
 
-const ContactsContext = React.createContext<ContactsContextType>({} as ContactsContextType);
+export const ContactsContext = React.createContext<ContactsContextType>({} as ContactsContextType);
 
 export function ContactsContextProvider(props: ContactsContextPropsType) {
 
