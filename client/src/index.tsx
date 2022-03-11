@@ -3,6 +3,15 @@
 
 import ReactDOM from 'react-dom';
 import App from './App';
+import { UserContextProvider } from './context/UserContext';
+import { DataContextProvider } from './context/MainContext';
 import './index.css';
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <DataContextProvider>
+    <UserContextProvider>
+    <App />
+    </UserContextProvider>
+  </DataContextProvider>,
+  document.getElementById("root")
+);
