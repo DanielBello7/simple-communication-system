@@ -9,17 +9,21 @@ type DataContextProps = {
 
 type DataContextType = {
   isLoading: boolean,
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  address: string
 }
+
+const address = "http://localhost:5050";
 
 export const DataContext = React.createContext<DataContextType>({} as DataContextType)
 
 export function DataContextProvider(props: DataContextProps) {
-  const [isLoading, setLoading] = useState(!false);
+  const [isLoading, setLoading] = useState(false);
   return (
     <DataContext.Provider value={{
       isLoading,
-      setLoading
+      setLoading,
+      address
     }}>
       {props.children}
     </DataContext.Provider>

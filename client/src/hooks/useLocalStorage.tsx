@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const PREFIX = "inscript-";
 
-export default function useLocalStorage(key: string, initialValue: any) {
+export default function useLocalStorage<T>(key: string, initialValue: T) {
   const prefixedKey = PREFIX + key;
 
   const [value, setValue] = useState(() => {
