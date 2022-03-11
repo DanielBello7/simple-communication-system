@@ -3,16 +3,16 @@
 
 import React, { useReducer } from 'react';
 import { 
-  CountType,
+  InitialStateType,
   CountActionEnum,
-  ConversationsContextProps, 
-  CountActionType, 
+  ConversationsContextPropsType, 
+  ReducerActionType, 
   ConversationsContextType
 } from '../types/ConversationTypes.types';
 
-const initialState: CountType = {count: 0}
+const initialState: InitialStateType = {count: 0}
 
-function reducer(state: CountType, action: CountActionType) {
+function reducer(state: InitialStateType, action: ReducerActionType) {
   switch (action.type){
     case CountActionEnum.INCREASE:
       return {count: state.count + action.payload}
@@ -25,14 +25,11 @@ function reducer(state: CountType, action: CountActionType) {
 
 export const ConversationsContext = React.createContext<ConversationsContextType>({} as ConversationsContextType);
 
-export function ConversationsContextProvider(props: ConversationsContextProps) {
+export function ConversationsContextProvider(props: ConversationsContextPropsType) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <ConversationsContext.Provider value={{
-      state, 
-      dispatch
-    }}>
+    <ConversationsContext.Provider value={{state, dispatch}}>
       {props.children}
     </ConversationsContext.Provider>
   )

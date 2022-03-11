@@ -3,20 +3,20 @@
 
 export enum CountActionEnum { INCREASE, DECREASE }
 
-export type ConversationsContextProps = {
-  children: React.ReactNode
-}
-
-export type CountType = {
+export type InitialStateType = {
   count: number
 }
 
-export type ConversationsContextType = {
-  state: CountType,
-  dispatch: React.Dispatch<CountActionType>
+export type ConversationsContextPropsType = {
+  children: React.ReactNode
 }
 
-export type CountActionType = {
+export type ReducerActionType = {
   type: CountActionEnum.INCREASE | CountActionEnum.DECREASE,
   payload: number
+}
+
+export type ConversationsContextType = {
+  state: InitialStateType,
+  dispatch: React.Dispatch<ReducerActionType>
 }
