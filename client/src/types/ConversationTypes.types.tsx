@@ -1,7 +1,7 @@
 
 
 
-export enum ConversationActions { CREATE_CONVERSATION, UPDATE_CONVERSATION, DELETE_CONVERSATION }
+export enum ConversationActions { CREATE_CONVERSATION, ADD_MESSAGE, DELETE_CONVERSATION, DELETE_MESSAGE }
 
 export enum MessageType { MEDIA, TEXT, REPLY }
 
@@ -20,6 +20,7 @@ export type Message = {
 }
 
 export type Conversation = {
+  _id: string,
   recipients: string[],
   messages: Message[]
 }
@@ -31,8 +32,9 @@ export type ConversationsContextPropsType = {
 }
 
 export type ReducerActionType = {
-  type: ConversationActions.CREATE_CONVERSATION | ConversationActions.DELETE_CONVERSATION | ConversationActions.UPDATE_CONVERSATION,
-  payload: Conversation
+  type: ConversationActions.CREATE_CONVERSATION | ConversationActions.DELETE_CONVERSATION | ConversationActions.ADD_MESSAGE | ConversationActions.DELETE_MESSAGE,
+  payload: string,
+  message?: Message,
 }
 
 export type ConversationsContextType = {

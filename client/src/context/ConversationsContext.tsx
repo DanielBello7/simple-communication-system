@@ -2,13 +2,14 @@
 
 
 import React, { useContext, useReducer, useCallback } from 'react';
+import { v4 as uuid } from 'uuid';
 import { 
   InitialStateType,
   ConversationActions,
   ConversationsContextPropsType, 
   ReducerActionType, 
   ConversationsContextType,
-  Message
+  Conversation
 } from '../types/ConversationTypes.types';
 import { ContactsContext } from './ContactsContext';
 
@@ -18,16 +19,33 @@ const initialState: InitialStateType = [];
 function reducer(state: InitialStateType, action: ReducerActionType) {
   switch (action.type){
     case ConversationActions.CREATE_CONVERSATION:
-      return [...state, {...action.payload}];
+      const newConversation: Conversation = {
+        _id: uuid(),
+        recipients: [],
+        messages: []
+      }
+      return [...state, newConversation];
     case ConversationActions.DELETE_CONVERSATION:
-      const newConversations = state.filter(conversation => {
-        return conversation.recipients !== action.payload.recipients
-      });
+      const newConversations = state.filter(conversation => conversation._id !== action.payload);
       return [...newConversations];
-    case ConversationActions.UPDATE_CONVERSATION:
-      return [...state, {...action.payload}];
+    case ConversationActions.ADD_MESSAGE:
+      state.map(conversation => {
+        if (conversation._id === action.payload) 
+          return { conversation, messages: [conversation.messages, {...action.message}]}
+        return conversation;
+      });
+      return state;
+    case ConversationActions.DELETE_MESSAGE:
+      state.map(conversation => {
+        if (conversation._id === action.payload){
+          const newMessages = conversation.messages.filter(message => message._id !== action.message?._id);
+          return {...conversation, messages: [...newMessages]}
+        }
+        return conversation;
+      });
+      return state;
     default:
-      return [...state];
+      return state;
   }
 }
 
@@ -38,13 +56,7 @@ export function ConversationsContextProvider(props: ConversationsContextPropsTyp
 
   const contactsContext = useContext(ContactsContext);
 
-  const formattedConversations = state.map((conversation, index) => {
-    return conversation;
-  });
-
-  const addMessageToConversation = useCallback((message: Message) => {
-    
-  }, [])
+  const formattedConversations = state.map((conversation, index) => conversation);
 
   return (
     <ConversationsContext.Provider value={{state, dispatch, formattedConversations}}>
