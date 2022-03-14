@@ -2,8 +2,9 @@
 
 
 import React from 'react';
-import Login from './Login';
-import CreateAccount from './CreateAccount';
+import Home from './Home';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 import Default from './Default';
 import Header from './Header';
 import Footer from './Footer';
@@ -14,8 +15,9 @@ export default function UserAccount() {
     <React.Fragment>
     <Header />
     <Routes>
-      <Route path='/' element={<Login />} />
-      <Route path='/sign-up' element={<CreateAccount />} />
+      <Route path='/' element={<Home />} />
+      <Route path='/sign-in' element={<SignIn />} />
+      <Route path='/sign-up' element={<SignUp />} />
       <Route path='*' element={<Default />} />
     </Routes>
     <Footer />

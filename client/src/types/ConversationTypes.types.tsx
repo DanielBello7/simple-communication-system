@@ -1,6 +1,8 @@
 
 
 
+import { Contact } from './ContactsType.type'
+
 export enum ConversationActions { CREATE_CONVERSATION, ADD_MESSAGE, DELETE_CONVERSATION, DELETE_MESSAGE }
 
 export enum MessageType { MEDIA, TEXT, REPLY }
@@ -11,7 +13,7 @@ export type Message = {
   text: string,
   date: Date,
   time: Date,
-  sender: string | {},
+  sender: string | Contact,
   isSent: boolean,
   isRead: boolean,
   isDelivered: boolean,
@@ -21,7 +23,7 @@ export type Message = {
 
 export type Conversation = {
   _id: string,
-  recipients: string[],
+  recipients: (string | Contact)[] ,
   messages: Message[]
 }
 
@@ -40,5 +42,7 @@ export type ReducerActionType = {
 export type ConversationsContextType = {
   state: InitialStateType,
   dispatch: React.Dispatch<ReducerActionType>,
-  formattedConversations: Conversation[]
+  formattedConversations: Conversation[],
+  selectedConversation: Conversation,
+  setSelectedConversation: React.Dispatch<React.SetStateAction<number>>
 }

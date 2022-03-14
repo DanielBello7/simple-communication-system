@@ -17,7 +17,9 @@ export type InitialStateType = Contact[];
 
 export type ContactsContextType = {
   state: InitialStateType,
-  dispatch: React.Dispatch<ReducerActionType>
+  dispatch: React.Dispatch<ReducerActionType>,
+  selectedContact: Contact,
+  setSelectedContact: React.Dispatch<React.SetStateAction<number>>
 }
 
 export type ReducerActionType = {

@@ -1,7 +1,7 @@
 
 
 
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import {
   ContactsActions, 
   ContactsContextPropsType, 
@@ -15,6 +15,7 @@ const initialState: InitialStateType = []
 export const ContactsContext = React.createContext<ContactsContextType>({} as ContactsContextType);
 
 export function ContactsContextProvider(props: ContactsContextPropsType) {
+  const [selectedContact, setSelectedContact] = useState(0);
 
   function reducer(state: InitialStateType, action: ReducerActionType) {
     switch(action.type){
@@ -36,7 +37,12 @@ export function ContactsContextProvider(props: ContactsContextPropsType) {
 
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <ContactsContext.Provider value={{state, dispatch}}>
+    <ContactsContext.Provider value={{
+      state, 
+      dispatch,
+      setSelectedContact,
+      selectedContact: state[selectedContact]
+    }}>
       {props.children}
     </ContactsContext.Provider>
   )

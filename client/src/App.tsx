@@ -12,6 +12,7 @@ import { ConversationsContextProvider } from './context/ConversationsContext';
 import { ContactsContextProvider } from './context/ContactsContext';
 import { SocketContextProvider } from './context/SocketContext';
 import { BrowserRouter } from 'react-router-dom';
+import Toast from './modules/Toast';
 
 function App() {
   const userContext = useContext(UserContext);
@@ -36,6 +37,7 @@ function App() {
     <React.Fragment>
     {dataContext.isLoading ? <LoadingScreen /> : null}
     <Modals />
+    <Toast />
     {userContext?.user ? dashboard : userAccount}
     </React.Fragment>
   );

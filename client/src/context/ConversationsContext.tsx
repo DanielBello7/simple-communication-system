@@ -1,7 +1,7 @@
 
 
 
-import React, { useContext, useReducer, useCallback } from 'react';
+import React, { useContext, useReducer, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { 
   InitialStateType,
@@ -54,12 +54,34 @@ export const ConversationsContext = React.createContext<ConversationsContextType
 export function ConversationsContextProvider(props: ConversationsContextPropsType) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const [selectedConversation, setSelectedConversation] = useState(0);
+
   const contactsContext = useContext(ContactsContext);
 
-  const formattedConversations = state.map((conversation, index) => conversation);
+  const formattedConversations = state.map(conversation => {
+    const recipients = conversation.recipients.map(recipient => {
+      const contact = contactsContext.state.find(contact => contact.email === recipient);
+      const name = contact || recipient;
+      return name;
+    });
+
+    const messages = conversation.messages.map(message => {
+      const contact = contactsContext.state.find(contact => contact.email === message.sender);
+      const name = contact || message.sender;
+      return {...message, sender: name}  
+    });
+
+    return {...conversation, recipients, messages}
+  });
 
   return (
-    <ConversationsContext.Provider value={{state, dispatch, formattedConversations}}>
+    <ConversationsContext.Provider value={{
+        state, 
+        dispatch, 
+        formattedConversations,
+        setSelectedConversation,
+        selectedConversation: formattedConversations[selectedConversation]
+      }}>
       {props.children}
     </ConversationsContext.Provider>
   )

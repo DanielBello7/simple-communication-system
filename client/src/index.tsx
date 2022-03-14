@@ -9,9 +9,9 @@ import './index.css';
 
 ReactDOM.render(
   <DataContextProvider>
-    <UserContextProvider>
+  <UserContextProvider>
     <App />
-    </UserContextProvider>
+  </UserContextProvider>
   </DataContextProvider>,
   document.getElementById("root")
 );

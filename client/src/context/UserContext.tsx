@@ -2,18 +2,12 @@
 
 
 import React, { useContext } from 'react';
-import { UserType } from '../types/UserType.type';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { DataContext } from './MainContext';
+import { UserContextType, UserData, UserType } from '../types/UserType.type';
 
 type UserContextProps = {
   children: React.ReactNode
-}
-
-type UserContextType = {
-  user: UserType | null,
-  LoginUser: Function,
-  LogoutUser: Function
 }
 
 export const UserContext = React.createContext<UserContextType | null>(null);
@@ -33,11 +27,23 @@ export function UserContextProvider(props: UserContextProps){
   function LogoutUser(): void {
     dataContext.setLoading(true);
     setUser(null);
+    if (dataContext.theme.title === 'dark') dataContext.changeTheme();
+    return dataContext.setLoading(false);
+  }
+
+  function createAccount(data: UserData): void {
+    dataContext.setLoading(true);
+    dataContext.showAlert('Gotten');
     return dataContext.setLoading(false);
   }
 
   return (
-    <UserContext.Provider value={{user, LoginUser, LogoutUser}}>
+    <UserContext.Provider value={{
+      user, 
+      LoginUser, 
+      LogoutUser,
+      createAccount
+    }}>
       {props.children}
     </UserContext.Provider>
   )
