@@ -22,19 +22,6 @@ export default function Dashboard() {
       <h1>Dashboard</h1>
       <Sidebar />
       <OpenConversation />
-      <button className="btn btn-primary" 
-              data-bs-toggle="modal" 
-              data-bs-target="#alertModal">
-        Launch demo modal
-      </button>
-
-      <button type="button" 
-              className="btn btn-primary" 
-              id="liveToastBtn" 
-              onClick={() => handleToast()}>Show live toast
-      </button>
-
-
       <button onClick={() => dataContext.changeTheme()}>Change Theme</button>
       <button onClick={() => userContext?.LogoutUser()}>Logout</button>
     </div>

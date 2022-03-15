@@ -30,17 +30,16 @@ export function DataContextProvider(props: DataContextProps) {
   const [isLoading, setLoading] = useState(false);
   const [alertMsg, setAlertMsg] = useState("");
   const [toastMsg, setToastMsg] = useState("");
-  const [isLight, setIsLight] = useState(false);
+  const [isLight, setIsLight] = useState(true);
+
+  if (isLight) {
+    document.body.classList.remove(`${DarkTheme.text}`);
+    document.body.classList.remove(`${DarkTheme.background}`);
+  }
+  else document.body.className += ` ${DarkTheme.background} ${DarkTheme.text}`;
 
   const changeTheme = () => {
     setIsLight(prevState => !prevState);
-    if (isLight) {
-      document.body.classList.remove(`${DarkTheme.text}`);
-      document.body.classList.remove(`${DarkTheme.background}`);
-    }
-    else {
-      document.body.className += ` ${DarkTheme.background} ${DarkTheme.text}`;
-    }
   }
 
   function showAlert(msg: string): void {
@@ -65,7 +64,7 @@ export function DataContextProvider(props: DataContextProps) {
       alertMsg,
       showAlert,
       toastMsg,
-      theme: isLight ? DarkTheme : LightTheme,
+      theme: isLight ? LightTheme : DarkTheme,
       changeTheme,
       showToast,
       setMode: setIsLight
