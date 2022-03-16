@@ -22,7 +22,7 @@ export default function AlertModal() {
                 data-bs-dismiss="modal" 
                 aria-label="Close"></button>
       </div>
-      <div className="modal-body">{dataContext.alertMsg}</div>
+      <div className={`modal-body text-dark`}>{dataContext.alertMsg}</div>
       <div className="modal-footer">
         <button type="button" 
                 className="btn btn-primary"

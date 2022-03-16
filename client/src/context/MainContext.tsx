@@ -14,11 +14,13 @@ type DataContextType = {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   address: string,
   alertMsg: string,
+  isLight: boolean,
   toastMsg: string,
   showAlert: (msg: string) => void,
   showToast: (msg: string) => void,
   theme: Theme,
   changeTheme: Function,
+  search: Function,
   setMode: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -56,6 +58,10 @@ export function DataContextProvider(props: DataContextProps) {
     return toast.show();
   }
 
+  function search(item: string): void {
+    showAlert(`You searched for ${item}`);
+  }
+
   return (
     <DataContext.Provider value={{
       isLoading,
@@ -67,7 +73,9 @@ export function DataContextProvider(props: DataContextProps) {
       theme: isLight ? LightTheme : DarkTheme,
       changeTheme,
       showToast,
-      setMode: setIsLight
+      setMode: setIsLight,
+      search,
+      isLight
     }}>
       {props.children}
     </DataContext.Provider>
