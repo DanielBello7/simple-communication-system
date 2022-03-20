@@ -1,53 +1,64 @@
 
 
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Screen } from './Dashboard';
+import { PostsContext } from '../../context/PostsContext';
+import { PostType } from "../../types/PostType.type";
+import toUpperFirst from '../../lib/toUpperFirst';
+import ComponentLoader from '../ComponentLoader';
+
 type FeedTabProps = {
   setActiveScreen: React.Dispatch<React.SetStateAction<Screen>>
 }
 
-const feed = [
-  'Feed Item',
-  'Feed Item 1',
-  'Feed Item 2',
-  'Feed Item 3',
-  'Feed Item 4',
-  'Feed Item 5',
-  'Feed Item 6',
-  'Feed Item 7',
-  'Feed Item 8',
-  'Feed Item 9',
-  'Feed Item 10',
-  'Feed Item 11',
-  'Feed Item 12',
-  'Feed Item 13',
-  'Feed Item 14',
-  'Feed Item 15',
-  'Feed Item 16',
-]
-
 
 export default function FeedTab(props: FeedTabProps) {
-  const [selected, setSelected] = useState("");
+  const [feedLoading, setFeedLoading] = useState(false);
+  const [selected, setSelected] = useState<number>(0);
+  const posts = useContext(PostsContext);
 
-  const handleClick = (feed: string) => {
+  const handleClick = (post: number) => {
     props.setActiveScreen(Screen.POST);
-    setSelected(feed);
+    setSelected(post);
+    posts?.setSelectedPost(post);
   }
 
-  const chatsOutput = feed.map((feed, index) => {
-    return (
-      <li className="nav-item py-3" onClick={() => handleClick(feed)} id="chat" key={index}>
-      <p className={`m-0 p-1 nav-link ${selected === feed ? "active" : ""}`}
-              aria-current={selected === feed ? "page" : "false"}>{feed}
-      </p>
-      </li>
+  const chatsOutput = posts?.state.map((post, index) => {
+    const fullname = `${toUpperFirst(post.createdBy.first_name)} ${toUpperFirst(post.createdBy.last_name)}`;
+    if (post.type === PostType.MEDIA){
+      return (
+        <div className={`col-11 mb-3 post ${selected === index ? "active" : ""}`} key={index} id='chat' onClick={() => handleClick(index)}>
+        <div className="card h-100">
+          <div className="card-header text-primary">{post.createdBy.email}</div>
+          <img src={require(`../../img/${post.media}`)} className="card-img-top" alt="post"/>
+          <div className="card-body">
+            <h5 className="card-title">{fullname}</h5>
+            <p className="card-text">{post.text}</p>
+          </div>
+          <div className="card-footer">
+            <small className="text-muted">{post.date.toDateString()}</small>
+          </div>
+        </div>
+        </div>
+      )
+    }
+    else return (
+      <div className={`card border-black mb-3 col-11 post ${selected === index ? "active" : ""}`} key={index} id='chat' onClick={() => handleClick(index)}>
+      <div className="card-header text-primary">{post.createdBy.email}</div>
+      <div className="card-body text-dark">
+        <h5 className="card-title">{fullname}</h5>
+        <p className="card-text">{post.text}</p>
+      </div>
+      <div className="card-footer bg-light text-muted">
+        <small>{post.date.toDateString()}</small>
+      </div>
+      </div>
     )
   });
   return (
     <ul className="nav w-100 h-100 d-flex flex-column overflow-scroll" id="scroll-container">
-      {chatsOutput}
+      { feedLoading ? <ComponentLoader /> : chatsOutput }
     </ul>
   )
 } 

@@ -21,6 +21,7 @@ export default function Header(){
     event.preventDefault();
     const searchItem = searchRef.current?.value;
     dataContext.search(searchItem);
+    event.currentTarget.reset();
   }
   
   return (
@@ -40,15 +41,16 @@ export default function Header(){
 						aria-label="Toggle navigation">
       <i className="fas fa-bars" ></i>
     </button>
-    <form className='w-100' onSubmit={handleSubmit}>
+    <form className='w-100 d-none d-md-block d-lg-block' onSubmit={handleSubmit}>
     <input className="form-control form-control-dark" 
 					 type="text" 
            style={inputStyle}
 					 placeholder="Search" 
            ref={searchRef}
+           required
 					 aria-label="Search" />
     </form>
-    <div className="navbar navbar-expand-lg p-0 m-0">
+    <div className="navbar navbar-expand-lg p-0 m-0 col-12 col-md-auto col-lg-auto">
       <div className={`nav-item text-nowrap dropdown ${window.innerWidth >= 767 ? 'dropstart' : ''}`} 
            id="navbarNavDarkDropdown">
         <button className={`btn nav-link px-3 dropdown-toggle ${dataContext.theme.text}`}

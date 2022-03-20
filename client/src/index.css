@@ -83,6 +83,7 @@ header {
 
 #scroll-container {
   flex-wrap: nowrap;
+  align-items: center;
 }
 
 #scroll-container .nav-item {
@@ -95,7 +96,7 @@ header {
 
 @media (max-width: 767px) {
   #insideSideBar {
-    height: 81%;
+    height: 83%;
   }
   #tab-bar {
     height: 20%;
@@ -104,7 +105,7 @@ header {
 
 @media (max-width: 377px) {
   #insideSideBar {
-    height: 75%;
+    height: 80%;
   }
   #tab-bar {
     height: 20%;
@@ -113,14 +114,215 @@ header {
 
 #chat {
   cursor: pointer;
+  font-size: 0.9rem;
 }
 
 #chat:hover {
   transition: 0.4s ease all;
-  background-color: lightgrey;
+  background-color: #e4e4e460;
 }
 
 #default {
   justify-content: center;
   align-items: center;
+}
+
+#chat-window {
+  overflow: hidden;
+}
+
+.text-bubble,
+.text-bubble-me {
+  display: flex;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+.text-bubble {
+  align-items: flex-start;
+  text-align: left;
+  padding-right: 30%;
+}
+
+.text-bubble-me {
+  align-items: flex-end;
+  text-align: right;
+  padding-left: 30%;
+}
+
+.text,
+.text-sender,
+.text-time {
+  margin: 0px;
+  padding: 0px;
+}
+
+.text-time {
+  font-size: 0.6rem;
+  color: lightgrey;
+}
+
+.text-sender {
+  font-size: 0.6rem;
+  color: lightblue;
+}
+
+.text-container {
+  border: 1px solid whitesmoke;
+  padding: 10px 10px;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.4s ease all;
+}
+
+.text-container:hover,
+.text-container-reply-me:hover,
+.text-container-reply:hover {
+  transition: 0.4s ease all;
+  opacity: 0.5;
+}
+
+.text-container-reply-me,
+.text-container-reply {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.7rem;
+  text-align: right;
+  align-self: flex-end;
+  border-radius: 10px;
+  border-bottom-right-radius: 0px;
+  cursor: pointer;
+  max-width: 250px;
+  transition: 0.4s ease all;
+}
+.reply-text {
+  width: 100%;
+  align-self: flex-end;
+}
+
+.text-container-reply {
+  text-align: left;
+  align-self: flex-start;
+  border-radius: 10px;
+  border-bottom-left-radius: 0px;
+}
+
+.dp {
+  border-radius: 50%;
+}
+
+.img-box {
+  justify-content: center;
+  align-items: center;
+}
+
+.all-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.time-1 {
+  text-align: right;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 255, 0.611);
+}
+
+.name-1 {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.text-2 {
+  font-size: 0.8rem;
+  color: grey;
+}
+
+.text-3 {
+  padding-left: 10px;
+}
+
+#contact-1 {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#name-contact,
+#email-contact {
+  width: 100%;
+}
+
+#name-contact {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#email-contact {
+  color: grey;
+  font-size: 0.8rem;
+}
+
+#contact-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#contact-img {
+  width: 100%;
+  height: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#contact-info {
+  align-items: center;
+}
+
+#contact-info h1 {
+  font-weight: bold;
+}
+
+#contact-info p {
+  color: grey;
+}
+
+#following-info {
+  align-items: center;
+  justify-content: center;
+}
+
+.post {
+  cursor: pointer;
+  transition: 0.4s ease all;
+}
+
+.post:hover {
+  transition: 0.4s ease all;
+  opacity: 0.8;
+}
+
+.hover-1 {
+  cursor: pointer;
+  transition: 0.4s ease all;
+}
+
+.hover-1:hover {
+  transition: 0.4s ease all;
+  opacity: 0.6;
+}
+
+#floatingTextarea2 {
+  resize: none;
+}
+
+.chat-sub-but:hover {
+  transition: 0.4s ease all;
+  background-color: whitesmoke;
 }

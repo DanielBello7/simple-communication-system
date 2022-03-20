@@ -12,8 +12,9 @@ import {
   Conversation
 } from '../types/ConversationTypes.types';
 import { ContactsContext } from './ContactsContext';
+import { chats } from '../temp/Conversations';
 
-const initialState: InitialStateType = [];
+const initialState: InitialStateType = chats;
 
 
 function reducer(state: InitialStateType, action: ReducerActionType) {

@@ -1,53 +1,57 @@
 
 
 
-import { useState } from 'react';
-import { Screen } from './Dashboard';
-type ContactsTabProp = {
-  setActiveScreen: React.Dispatch<React.SetStateAction<Screen>>
-}
+import { useState, useContext } from 'react';
+import { Offcanvas } from 'bootstrap';
+import { ContactsContext } from '../../context/ContactsContext';
+import toUpperFirst from '../../lib/toUpperFirst';
+import OffCanvas from '../../modules/OffCanvas';
+import ComponentLoader from '../ComponentLoader';
+import img from '../../img/user-circle.svg';
 
-const contacts = [
-  'Contact',
-  'Contact 1',
-  'Contact 2',
-  'Contact 3',
-  'Contact 4',
-  'Contact 5',
-  'Contact 6',
-  'Contact 7',
-  'Contact 8',
-  'Contact 9',
-  'Contact 10',
-  'Contact 11',
-  'Contact 12',
-  'Contact 13',
-  'Contact 14',
-  'Contact 15',
-  'Contact 16',
-]
 
-export default function ContactsTab(props: ContactsTabProp) {
-  const [selected, setSelected] = useState("");
+export default function ContactsTab() {
+  const contacts = useContext(ContactsContext);
+  const [selected, setSelected] = useState<number | null>(null);
+  const [contactsLoading, setContactsLoading] = useState(false);
 
-  const handleClick = (contact: string) => {
-    props.setActiveScreen(Screen.CONTACT);
+  const handleClick = (contact: number) => {
+    const element = document.getElementById("offcanvasRight")!;
+    const offcanvas = Offcanvas.getOrCreateInstance(element, {keyboard: false, backdrop: false, scroll: false});
+    contacts.setSelectedContact(contact)
     setSelected(contact);
+    offcanvas.show();
   }
 
-  const chatsOutput = contacts.map((contact, index) => {
+  const chatsOutput = contacts.state.map((contact, index) => {
     return (
-      <li className="nav-item py-3" onClick={() => handleClick(contact)} id="chat" key={index}>
-      <p className={`m-0 p-1 nav-link ${selected === contact ? "active" : ""}`}
-              aria-current={selected === contact ? "page" : "false"}>{contact}
-      </p>
+      <li className="nav-item p-3" onClick={() => handleClick(index)} id="chat" key={index}>
+        <div className='row p-0 m-0 w-100' id="contact-2">
+          <div className='col-3 p-0 m-0' id="contact-3">
+          <div className='dp' style={{
+            backgroundImage: `url('${img}')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            width: '70px',
+            height: '70px'
+          }}/>
+          </div>
+          <div className={`col-9 nav-link p-0 m-0 ${selected === index ? "active" : ""}`} id='contact-1'
+               aria-current={selected === index ? "page" : "false"}>
+            <div className='row p-0 m-0' id="name-contact">
+              {`${toUpperFirst(contact.first_name)} ${toUpperFirst(contact.last_name)}`}
+            </div>
+            <div className='row p-0 m-0' id="email-contact">{contact.email}</div>
+          </div>
+        </div>
       </li>
     )
   });
 
   return (
     <ul className="nav w-100 h-100 d-flex flex-column overflow-scroll" id="scroll-container">
-      {chatsOutput}
+      { contactsLoading ? <ComponentLoader /> : chatsOutput }
+      <OffCanvas />
     </ul>
   )
 }

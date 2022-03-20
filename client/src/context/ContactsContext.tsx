@@ -9,8 +9,9 @@ import {
   InitialStateType, 
   ReducerActionType 
 } from '../types/ContactsType.type';
+import { people } from '../temp/Contacts';
 
-const initialState: InitialStateType = []
+const initialState: InitialStateType = people;
 
 export const ContactsContext = React.createContext<ContactsContextType>({} as ContactsContextType);
 

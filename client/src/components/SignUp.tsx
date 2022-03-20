@@ -28,6 +28,8 @@ export default function CreateAccount() {
     }
     
     await userContext?.createAccount(userData);
+
+    event.currentTarget.reset();
   }
 
   if (userContext?.user) return <Navigate to="/" replace />

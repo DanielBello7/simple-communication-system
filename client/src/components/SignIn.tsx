@@ -15,6 +15,7 @@ export default function Login() {
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
     await userContext?.LoginUser(email, password);
+    event.currentTarget.reset();
   }
   
   return (

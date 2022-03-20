@@ -19,8 +19,8 @@ export default function Sidebar(props: SideBarProps) {
   const dataContext = useContext(DataContext);
   
   return (
-    <nav id="sidebarMenu" className="col-md-4 col-lg-3 d-lg-flex d-md-block bg-light sidebar collapse">
-    <h2 className={`py-3 mb-0 ${dataContext.theme.text}`}>
+    <nav id="sidebarMenu" className="col-md-4 col-lg-3 d-md-flex d-lg-flex p-0 d-md-block bg-light sidebar collapse">
+    <h2 className={`p-3 mb-0 ${dataContext.theme.text}`}>
     <strong>
       {
         props.activeTab === Tabs.CHATS 
@@ -40,7 +40,7 @@ export default function Sidebar(props: SideBarProps) {
         props.activeTab === Tabs.CHATS 
         ? <ChatsTab setActiveScreen={props.setActiveScreen}/>
         : props.activeTab === Tabs.CONTACTS  
-        ? <ContactsTab setActiveScreen={props.setActiveScreen}/>
+        ? <ContactsTab />
         : props.activeTab === Tabs.HOME
         ? <FeedTab setActiveScreen={props.setActiveScreen}/>
         : props.activeTab === Tabs.USER

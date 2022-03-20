@@ -5,24 +5,24 @@ import { Contact } from './ContactsType.type'
 
 export enum ConversationActions { CREATE_CONVERSATION, ADD_MESSAGE, DELETE_CONVERSATION, DELETE_MESSAGE }
 
-export enum MessageType { MEDIA, TEXT, REPLY }
+export enum MessageType { MEDIA, TEXT }
 
 export type Message = {
   _id: string,
-  type: MessageType.MEDIA | MessageType.TEXT | MessageType.REPLY,
+  type: MessageType.MEDIA | MessageType.TEXT,
   text: string,
   date: Date,
-  time: Date,
   sender: string | Contact,
   isSent: boolean,
   isRead: boolean,
   isDelivered: boolean,
   media?: string,
-  replyMessage?: string
+  reply?: string
 }
 
 export type Conversation = {
   _id: string,
+  groupName?: string,
   recipients: (string | Contact)[] ,
   messages: Message[]
 }

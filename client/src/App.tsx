@@ -13,17 +13,20 @@ import { ContactsContextProvider } from './context/ContactsContext';
 import { SocketContextProvider } from './context/SocketContext';
 import { BrowserRouter } from 'react-router-dom';
 import Toast from './modules/Toast';
+import { PostsContextProvider } from './context/PostsContext';
 
 function App() {
   const userContext = useContext(UserContext);
   const dataContext = useContext(DataContext);
   const dashboard = (
     <SocketContextProvider>
+    <PostsContextProvider>
     <ContactsContextProvider>
     <ConversationsContextProvider>
       <Dashboard />
     </ConversationsContextProvider>
     </ContactsContextProvider>
+    </PostsContextProvider>
     </SocketContextProvider>
   );
 
