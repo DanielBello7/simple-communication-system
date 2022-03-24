@@ -9,7 +9,7 @@ export default function Toast() {
 
   return (
     <div className="toast-container">
-    <div className="position-fixed top-0 end-0 p-3" style={{zIndex: "11"}}>
+    <div className="position-fixed top-0 end-0 p-3" style={{zIndex: "9991"}}>
     <div id="liveToast" 
          className={`toast ${dataContext.theme.background}`} 
          role="alert" 

@@ -1,13 +1,13 @@
 
 
 
-import { useContext } from "react";
-import { DataContext } from "../../context/MainContext";
+import React, { useContext } from "react";
 import ChatsTab from "./ChatsTab";
 import ContactsTab from "./ContactsTab";
 import FeedTab from "./FeedTab";
 import UserProfileTab from "./UserProfileTab";
 import { Tabs, Screen } from './Dashboard';
+import { DataContext } from "../../context/MainContext";
 
 type SideBarProps = {
   activeTab: Tabs,
@@ -19,7 +19,7 @@ export default function Sidebar(props: SideBarProps) {
   const dataContext = useContext(DataContext);
   
   return (
-    <nav id="sidebarMenu" className="col-md-4 col-lg-3 d-md-flex d-lg-flex p-0 d-md-block bg-light sidebar collapse">
+    <nav id="sidebarMenu" className={`col-md-4 col-lg-3 d-md-flex d-lg-flex p-0 d-md-block ${dataContext.theme.title === 'dark'? 'bg-black bg-opacity-50': 'bg-light'} sidebar collapse`}>
     <h2 className={`p-3 mb-0 ${dataContext.theme.text}`}>
     <strong>
       {

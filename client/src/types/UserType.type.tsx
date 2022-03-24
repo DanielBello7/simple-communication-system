@@ -2,7 +2,10 @@
 
 export type UserType = {
   email: string,
-  password: string
+  password: string,
+  bio: string,
+  first_name: string,
+  last_name: string
 }
 
 export type UserContextType = {

@@ -14,7 +14,8 @@ export default function Header(){
   }
 
   const inputStyle = {
-    border: dataContext.theme.title === 'light' ? '1px solid whitesmoke' : ''
+    border: dataContext.theme.title === 'light' ? '1px solid whitesmoke' : '',
+    padding: '0px',
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -28,7 +29,7 @@ export default function Header(){
     <React.Fragment>
     <header className={`navbar navbar-dark ${dataContext.theme.background} flex-md-nowrap p-0 shadow`} 
             style={headerStyle}>
-		<p className={`navbar-brand col-md-4 col-lg-3 me-0 px-3 m-0 text-white bg-dark`} 
+		<p className={`navbar-brand col-md-4 col-lg-3 me-0 px-3 m-0 py-2 text-white bg-dark`} 
        style={headerStyle}>inScript Connect
     </p>
 		<button className="navbar-toggler position-absolute d-md-none collapsed" 
@@ -44,7 +45,6 @@ export default function Header(){
     <form className='w-100 d-none d-md-block d-lg-block' onSubmit={handleSubmit}>
     <input className="form-control form-control-dark" 
 					 type="text" 
-           style={inputStyle}
 					 placeholder="Search" 
            ref={searchRef}
            required
@@ -76,7 +76,7 @@ export default function Header(){
             </div>
           </li>
           <li><hr className="dropdown-divider"/></li>
-          <li><button className="btn dropdown-item" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</button></li>
+          <li><button className="btn dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</button></li>
         </ul>
       </div>
     </div>

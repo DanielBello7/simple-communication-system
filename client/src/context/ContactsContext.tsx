@@ -7,7 +7,9 @@ import {
   ContactsContextPropsType, 
   ContactsContextType, 
   InitialStateType, 
-  ReducerActionType 
+  ReducerActionType,
+  contactGroups,
+  GroupedContact
 } from '../types/ContactsType.type';
 import { people } from '../temp/Contacts';
 
@@ -17,6 +19,7 @@ export const ContactsContext = React.createContext<ContactsContextType>({} as Co
 
 export function ContactsContextProvider(props: ContactsContextPropsType) {
   const [selectedContact, setSelectedContact] = useState(0);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   function reducer(state: InitialStateType, action: ReducerActionType) {
     switch(action.type){
@@ -36,11 +39,21 @@ export function ContactsContextProvider(props: ContactsContextPropsType) {
     }
   }
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const groupedContacts = contactGroups.map(group => {
+    let box: GroupedContact[] = [];
+    state.forEach((contact, index) => {
+      const first_title = contact.first_name[0].toLocaleLowerCase();
+      if (group === first_title) box.push({...contact, id: index});
+    })
+    return {groupTitle: group, groupChildren: box}
+  });
+
+  
   return (
     <ContactsContext.Provider value={{
       state, 
       dispatch,
+      groupedContacts,
       setSelectedContact,
       selectedContact: state[selectedContact]
     }}>

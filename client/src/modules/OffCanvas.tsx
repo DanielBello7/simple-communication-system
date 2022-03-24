@@ -1,14 +1,19 @@
 
 
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import ContactScreen from "../components/dashboard/ContactScreen";
 import ComponentLoader from "../components/ComponentLoader";
+import { DataContext } from '../context/MainContext';
 
 export default function OffCanvas() {
   const [infoLoading, setInfoLoading] = useState(false);
+  const { theme } = useContext(DataContext);
   return (
-    <div className="offcanvas offcanvas-end" tabIndex={-1} id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div className={`offcanvas offcanvas-end shadow-lg ${theme.background}`} 
+         tabIndex={-1} 
+         id="offcanvasRight" 
+         aria-labelledby="offcanvasRightLabel">
     <div className="offcanvas-header">
         <p id="offcanvasRightLabel"></p>
         <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>

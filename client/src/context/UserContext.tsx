@@ -10,16 +10,21 @@ type UserContextProps = {
   children: React.ReactNode
 }
 
-export const UserContext = React.createContext<UserContextType | null>(null);
+export const UserContext = React.createContext<UserContextType>({} as UserContextType);
 
 export function UserContextProvider(props: UserContextProps){
-  const dataContext = useContext(DataContext);
-
   const [user, setUser] = useLocalStorage<UserType | null>('user', null);
+  const dataContext = useContext(DataContext);
 
   function LoginUser(email: string, password: string): void {
     dataContext.setLoading(true);
-    const userData = { email: email, password: password }
+    const userData: UserType = { 
+      email: email, 
+      password: password, 
+      bio: 'Some quick example text to build on the card title and make up the bulk of the cards content.', 
+      first_name: 'Goke', 
+      last_name: 'Bello' 
+    }
     setUser(userData);
     return dataContext.setLoading(false);
   }

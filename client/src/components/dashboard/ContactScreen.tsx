@@ -5,9 +5,11 @@ import { useContext } from "react";
 import { ContactsContext } from "../../context/ContactsContext";
 import img from '../../img/user-circle.svg'
 import toUpperFirst from "../../lib/toUpperFirst";
+import { DataContext } from "../../context/MainContext";
 
 export default function ContactScreen() {
   const contact = useContext(ContactsContext);
+  const { theme } = useContext(DataContext);
 
   return (
     <div id='contact-screen'>
@@ -37,23 +39,23 @@ export default function ContactScreen() {
           </button>
         </div>
 
-        <div className="w-100 mt-4 d-flex " id='following-info'>
+        <div className="w-100 mt-4 d-flex" id='following-info'>
           <ul className="list-group col-5">
-          <li className="list-group-item d-flex justify-content-between align-items-center">Contacts
+          <li className={`list-group-item d-flex justify-content-between ${theme.background} ${theme.text} ${theme.title ==='dark'?'border-primary':''} mx-1 align-items-center`}>Contacts
           <span className="badge bg-primary rounded-pill">14</span>
           </li>
           </ul>
 
           <ul className="list-group col-4">
-          <li className="list-group-item d-flex justify-content-between align-items-center">Posts
+          <li className={`list-group-item d-flex justify-content-between align-items-center ${theme.background} ${theme.text} ${theme.title ==='dark'?'border-primary':''}`}>Posts
           <span className="badge bg-primary rounded-pill">14</span>
           </li>
           </ul>
         </div>
 
 
-        <div className="card border-primary mb-3 mt-4" style={{maxWidth: "18rem"}}>
-          <div className="card-header">Bio</div>
+        <div className={`card border-primary mb-3 mt-4 ${theme.background}`} style={{maxWidth: "18rem"}}>
+          <div className={`card-header ${theme.title ==='dark'?'bg-black bg-opacity-25':''}`}>Bio</div>
           <div className="card-body text-primary">
             <h5 className="card-title">@{contact.selectedContact.email}</h5>
             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

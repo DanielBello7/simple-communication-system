@@ -4,16 +4,16 @@
 import { useState, useContext } from 'react';
 import { Offcanvas } from 'bootstrap';
 import { ContactsContext } from '../../context/ContactsContext';
-import toUpperFirst from '../../lib/toUpperFirst';
-import OffCanvas from '../../modules/OffCanvas';
 import ComponentLoader from '../ComponentLoader';
-import img from '../../img/user-circle.svg';
+import ContactTile from './ContactTile';
+import { DataContext } from '../../context/MainContext';
 
 
 export default function ContactsTab() {
   const contacts = useContext(ContactsContext);
   const [selected, setSelected] = useState<number | null>(null);
   const [contactsLoading, setContactsLoading] = useState(false);
+  const { theme } = useContext(DataContext);
 
   const handleClick = (contact: number) => {
     const element = document.getElementById("offcanvasRight")!;
@@ -23,35 +23,34 @@ export default function ContactsTab() {
     offcanvas.show();
   }
 
-  const chatsOutput = contacts.state.map((contact, index) => {
+  const chatsOutput = contacts.groupedContacts.map((contact, index) => {
+    if (contact.groupChildren.length > 0)
     return (
-      <li className="nav-item p-3" onClick={() => handleClick(index)} id="chat" key={index}>
-        <div className='row p-0 m-0 w-100' id="contact-2">
-          <div className='col-3 p-0 m-0' id="contact-3">
-          <div className='dp' style={{
-            backgroundImage: `url('${img}')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            width: '70px',
-            height: '70px'
-          }}/>
-          </div>
-          <div className={`col-9 nav-link p-0 m-0 ${selected === index ? "active" : ""}`} id='contact-1'
-               aria-current={selected === index ? "page" : "false"}>
-            <div className='row p-0 m-0' id="name-contact">
-              {`${toUpperFirst(contact.first_name)} ${toUpperFirst(contact.last_name)}`}
-            </div>
-            <div className='row p-0 m-0' id="email-contact">{contact.email}</div>
-          </div>
-        </div>
-      </li>
+      <div className={`w-100 p-0 m-0 mb-3 pb-2 border-bottom ${theme.text}`} key={index}>
+        <p className={`m-0 p-0 px-3 h5`}>
+          {contact.groupTitle.toUpperCase()}
+        </p>
+        <ul className='w-100 p-0 m-0'>
+        {contact.groupChildren.map((contact, index) => {
+          return <ContactTile contact={contact} index={index} handleClick={handleClick} selected={selected} key={index}/>
+        })}
+        </ul>
+      </div>
     )
   });
 
   return (
-    <ul className="nav w-100 h-100 d-flex flex-column overflow-scroll" id="scroll-container">
+    <div className="nav w-100 h-100 d-flex flex-column overflow-scroll position-relative" id="scroll-container">
       { contactsLoading ? <ComponentLoader /> : chatsOutput }
-      <OffCanvas />
-    </ul>
+      <div className={`position-sticky ${contacts.state.length > 6 ? 'bottom-0' : 'top-100'} end-0`}>
+      <button className='btn bg-primary mb-3 shadow rounded-circle p-0 text-white' 
+              style={{width: '50px', height: '50px'}}
+              data-bs-toggle="modal" 
+              data-bs-target="#newContactModal"
+              id="floatingAction">
+      <i className='fas fa-user fa-sm' />
+      </button>  
+      </div>
+    </div>
   )
 }

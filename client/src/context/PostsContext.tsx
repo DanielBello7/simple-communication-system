@@ -44,7 +44,7 @@ function reducer(state: Post[], action: ReducerActionType) {
 
 const initialState: Post[] = posts_data;
 
-export const PostsContext = React.createContext<PostsContextType | null>(null);
+export const PostsContext = React.createContext<PostsContextType>({} as PostsContextType);
 
 export function PostsContextProvider(props: PostsPropsType) {
   const [selectedPost, setSelectedPost] = useState<number>(0);

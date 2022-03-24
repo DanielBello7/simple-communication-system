@@ -57,7 +57,19 @@ export const chats: Conversation[] = [
         sender: 'gokebello@gmail.com',
         isSent: true,
         isDelivered: true,
-        isRead: true
+        isRead: true,
+        reply: 'oavoavev'
+      },
+      {
+        _id: 'ueaeouuuuee',
+        type: MessageType.TEXT,
+        text: 'Dont say things bro',
+        date: new Date(),
+        sender: 'gokebello@gmail.com',
+        isSent: true,
+        isDelivered: true,
+        isRead: true,
+        reply: 'ouavuvsova'
       },
     ]
   },

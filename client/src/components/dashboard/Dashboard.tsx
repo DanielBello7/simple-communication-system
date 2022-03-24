@@ -5,6 +5,9 @@ import { useState } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import OpenConversation from "./OpenConversation";
+import OffCanvas from '../../modules/OffCanvas';
+import Toast from '../../modules/Toast';
+import Modals from '../../modules/Modals';
 
 export enum Tabs { HOME, CHATS, CONTACTS, USER }
 
@@ -27,6 +30,9 @@ function Dashboard() {
                setActiveScreen={setActiveScreen}/>
       <OpenConversation activeScreen={activeScreen} 
                         setActiveScreen={setActiveScreen}/>
+      <Modals />
+      <Toast />
+      <OffCanvas />
       </div>
     </main>
     </div>

@@ -12,7 +12,7 @@ export type SocketContextType = {
   setSocket: React.Dispatch<React.SetStateAction<{} | null>>
 }
 
-const SocketContext = React.createContext<SocketContextType | null>(null);
+const SocketContext = React.createContext<SocketContextType>({} as SocketContextType);
 
 export function SocketContextProvider(props: SocketContextPropType) {
   const [socket, setSocket] = useState<{} | null>(null);
