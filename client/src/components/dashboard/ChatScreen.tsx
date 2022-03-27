@@ -1,20 +1,21 @@
 
-
-
+ 
+ 
 import { useContext, useRef, useState, useCallback } from "react";
 import TextBubble from "./TextBubble"
 import ComponentLoader from "../ComponentLoader";
-import { ConversationsContext } from "../../context/ConversationsContext";
 import { DataContext } from "../../context/MainContext";
+import { ConversationsContext } from "../../context/ConversationsContext";
 import { ContactMessage, Message, PostMessage } from '../../types/ConversationTypes.types';
 
 
 export default function ChatScreen() {
-  const [chatLoading, setChatLoading] = useState(false);
-  const convo = useContext(ConversationsContext);
-  const textRef = useRef<HTMLTextAreaElement>(null);
-  const { theme } = useContext(DataContext);
   const [replyMsg, setReplyMsg] = useState<Message | PostMessage | ContactMessage | null>(null);
+  const [chatLoading, setChatLoading] = useState(false);
+  const textRef = useRef<HTMLTextAreaElement>(null);
+  const { selectedConversation } = useContext(ConversationsContext);
+  const { theme } = useContext(DataContext);
+
 
   const setRef = useCallback((node): void => {
     if (node) node.scrollIntoView();
@@ -30,11 +31,18 @@ export default function ChatScreen() {
       }, 500);
     }
   }
+  
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    alert(textRef.current?.value);
+    event.currentTarget.reset();
+    setReplyMsg(null);
+  }
 
-  const messagesOutput = convo.selectedConversation.messages.map((message, index) => {
+  const messagesOutput = selectedConversation.messages.map((message, index) => {
     let reply = null;
-    const lastMessage = convo.selectedConversation.messages.length - 1 === index;
-    if(message.reply) reply = convo.selectedConversation.messages.find(msg => msg._id === message.reply);
+    const lastMessage = selectedConversation.messages.length - 1 === index;
+    if(message.reply) reply = selectedConversation.messages.find(msg => msg._id === message.reply);
     return <TextBubble message={message} 
                        key={index} 
                        reply={reply} 
@@ -43,12 +51,7 @@ export default function ChatScreen() {
                        point={lastMessage ? setRef : null}/>
   });
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault()
-    alert(textRef.current?.value);
-    event.currentTarget.reset();
-    setReplyMsg(null);
-  }
+  let replyMessage = selectedConversation.messages.find(msg => msg._id === replyMsg?._id);
 
   return (
     <div className="w-100 h-100 mb-3 d-flex flex-column" id="chat-window">
@@ -73,7 +76,7 @@ export default function ChatScreen() {
       </textarea>
       <label htmlFor="floatingTextarea2 text-truncate" id="label-header">
         <span className="text-truncate">
-        {!replyMsg ? 'Write Something...': `Replying: ${replyMsg.text ? replyMsg.text : "Post"}`}
+        { !replyMsg ? 'Write Something...' : `Replying: ${replyMessage?.text || "Message"}` }
         </span>
       </label>
       </div>

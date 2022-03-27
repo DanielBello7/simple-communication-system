@@ -12,7 +12,7 @@ type ContactMessageTextBubbleType = {
   message: ContactMessage,
   reply?: Message | ContactMessage | PostMessage | null,
   showMessage: (data: string) => void,
-  setReplyState: (data: Message | ContactMessage) => void,
+  setReplyState: (data: Message | PostMessage | ContactMessage) => void,
   point?: React.LegacyRef<HTMLDivElement> | null
 }
 

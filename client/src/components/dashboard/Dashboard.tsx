@@ -11,12 +11,13 @@ import Modals from '../../modules/Modals';
 
 export enum Tabs { HOME, CHATS, CONTACTS, USER }
 
-export enum Screen { CHAT, POST, DEFAULT }
+export enum Screen { CHAT, POST, DEFAULT, GENERAL }
+
+
 
 function Dashboard() {
   const [activeTab, setActiveTab] = useState<Tabs>(Tabs.HOME);
-
-  const [activeScreen, setActiveScreen] = useState(Screen.DEFAULT);
+  const [activeScreen, setActiveScreen] = useState<Screen>(Screen.DEFAULT);
 
   return (
     <div id="main" className="d-flex flex-column">

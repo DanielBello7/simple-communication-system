@@ -2,30 +2,29 @@
 
 
 import React, { useReducer, useState } from 'react';
-import { Post } from '../types/PostType.type';
+import { PostTextType, PostMediaType } from '../types/PostType.type';
 import { posts_data } from '../temp/Posts';
 
+export enum ActionTypes { CREATE, LIKE, UNLIKE, COMMENT, REPORT }
 
 export type PostsPropsType = {
   children: React.ReactNode
 }
 
-export enum ActionTypes { CREATE, LIKE, UNLIKE, COMMENT, REPORT }
-
 export type PostsContextType = {
-  state: Post[],
+  state: (PostMediaType | PostTextType)[],
   dispatch: React.Dispatch<ReducerActionType>,
-  selectedPost: Post | null,
+  selectedPost: (PostMediaType | PostTextType) | null,
   setSelectedPost: React.Dispatch<React.SetStateAction<number>>
 }
 
 export type ReducerActionType = {
   type: ActionTypes.COMMENT | ActionTypes.CREATE | ActionTypes.LIKE | ActionTypes.UNLIKE | ActionTypes.REPORT,
   payload: string,
-  post?: Post
-}
+  post?: (PostMediaType | PostTextType)
+} 
 
-function reducer(state: Post[], action: ReducerActionType) {
+function reducer(state: (PostMediaType | PostTextType)[], action: ReducerActionType) {
   switch (action.type){
     case ActionTypes.CREATE:
       return state;
@@ -42,9 +41,11 @@ function reducer(state: Post[], action: ReducerActionType) {
   }
 }
 
-const initialState: Post[] = posts_data;
+const initialState: (PostMediaType | PostTextType)[] = posts_data;
 
 export const PostsContext = React.createContext<PostsContextType>({} as PostsContextType);
+
+
 
 export function PostsContextProvider(props: PostsPropsType) {
   const [selectedPost, setSelectedPost] = useState<number>(0);

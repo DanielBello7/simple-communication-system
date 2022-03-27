@@ -3,18 +3,18 @@
 
 import { useContext } from "react";
 import { DataContext } from "../../context/MainContext";
-import { Message, PostMessage, ContactMessage, MessageType } from '../../types/ConversationTypes.types';
+import { Message, PostMessage, ContactMessage, MessageType, PostTextMessageType } from '../../types/ConversationTypes.types';
 import toUpperFirst from "../../lib/toUpperFirst";
-import { Post } from "../../types/PostType.type";
+import { PostTextType } from "../../types/PostType.type";
 
 type TextPostMsgTextBubbleProps = {
   from: 'user' | 'other',
-  message: PostMessage,
+  message: PostTextMessageType,
   reply?: Message | ContactMessage | PostMessage | null,
   showMessage: (data: string) => void,
   setReplyState: (data: Message | PostMessage | ContactMessage) => void,
   point?: React.LegacyRef<HTMLDivElement> | null,
-  postMsg: Post | undefined
+  postMsg: PostTextType
 }
 
 export default function TextPostMsgTextBubble({ 
@@ -26,7 +26,7 @@ export default function TextPostMsgTextBubble({
   postMsg
 }: TextPostMsgTextBubbleProps) {
   const { theme } = useContext(DataContext);
-  const fullname = `${toUpperFirst(postMsg?.createdBy.first_name)} ${toUpperFirst(postMsg?.createdBy.last_name)}`;
+  const fullname = `${toUpperFirst(postMsg.createdBy.first_name)} ${toUpperFirst(postMsg.createdBy.last_name)}`;
   if (from === 'user') {
     return (
       <div className="text-post-me">

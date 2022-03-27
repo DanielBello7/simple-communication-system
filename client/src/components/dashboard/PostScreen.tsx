@@ -15,10 +15,9 @@ export default function PostScreen() {
   const [commentsLoading, setCommentsLoading] = useState(false);
   const [postLoading, setPostLoading] = useState(false);
   const { theme } = useContext(DataContext);
+  const { selectedPost } = useContext(PostsContext);
 
-  const posts = useContext(PostsContext);
-
-  const comments = posts?.selectedPost?.comments?.map((comment, index) => {
+  const comments = selectedPost?.comments.map((comment, index) => {
     return <Comment comment={comment} index={index} key={index}/>
   });
  
@@ -28,13 +27,15 @@ export default function PostScreen() {
         {
           postLoading 
           ? <ComponentLoader />
-          : posts?.selectedPost?.type === PostType.MEDIA 
-          ? <MediaPost post={posts.selectedPost}/> 
-          : <TextPost post={posts?.selectedPost}/>
+          : selectedPost?.type === PostType.MEDIA 
+          ? <MediaPost post={selectedPost}/> 
+          : selectedPost?.type === PostType.TEXT 
+          ? <TextPost post={selectedPost}/>
+          : null
         }
         <CommentInput type='mobile-screen'/>
         <div className="accordion d-block d-lg-none" id="accordionExample">
-          <div className={`accordion-item ${theme.title==='dark'?'border-0':''}`}>
+          <div className={`accordion-item ${theme.title==='dark'&&'border-0'}`}>
           <h2 className="accordion-header" id="headingOne">
             <button className="accordion-button" 
                     type="button" 
@@ -53,7 +54,7 @@ export default function PostScreen() {
             { 
               commentsLoading 
               ? <ComponentLoader />
-              : posts?.selectedPost?.comments ? comments : "" 
+              : selectedPost?.comments ? comments : "" 
             }
             </ul>
           </div>
@@ -66,15 +67,15 @@ export default function PostScreen() {
         <ul className="list-group w-100">
         <li className={`list-group-item d-flex justify-content-between align-items-center ${theme.title==='dark'?'bg-black':'bg-light'} ${theme.text}`}>
         <strong>Comments</strong>
-        <span className="badge bg-primary rounded-pill">{posts?.selectedPost?.comments?.length}</span>
+        <span className="badge bg-primary rounded-pill">{selectedPost?.comments.length}</span>
         </li>
         </ul>
 
-        <ul className={`list-group w-100 d-flex my-2 flex-grow-1 ${theme.title==='dark'?'bg-black bg-opacity-25':''} overflow-scroll`}>
+        <ul className={`list-group w-100 d-flex my-2 flex-grow-1 ${theme.title==='dark'&&'bg-black bg-opacity-25'} overflow-scroll`}>
         { 
           commentsLoading
           ? <ComponentLoader />
-          : posts?.selectedPost?.comments 
+          : selectedPost?.comments
           ? comments 
           : <p className="p-3">No comments yet</p>
         }

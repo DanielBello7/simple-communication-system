@@ -2,6 +2,8 @@
 
 
 import { Conversation, MessageType } from '../types/ConversationTypes.types';
+import { PostType } from '../types/PostType.type';
+import { MediaType } from '../types/GeneralTypes.types'
 
 export const chats: Conversation[] = [
   {
@@ -15,8 +17,8 @@ export const chats: Conversation[] = [
         date: new Date(),
         sender: 'gokebello@gmail.com',
         isSent: true,
-        isRead: true,
         isDelivered: true,
+        isRead: true
       },
       {
         _id: 'ouavusvs',
@@ -183,7 +185,8 @@ export const chats: Conversation[] = [
         isRead: true,
         reply: 'ao9oq0081308aeaeq803yq3',
         post: 'lauboue0001',
-        postType: 'media'
+        postType: PostType.MEDIA,
+        mediaType: MediaType.IMAGE 
       },
       {
         _id: '901030801083180',
@@ -206,7 +209,8 @@ export const chats: Conversation[] = [
         isRead: true,
         reply: 'ii0183018308bcoauevcae',
         post: 'aoubevoabeobvuo2u4o24o20482',
-        postType: 'media'
+        postType: PostType.MEDIA,
+        mediaType: MediaType.IMAGE
       }
     ]
   },
@@ -248,7 +252,80 @@ export const chats: Conversation[] = [
         isDelivered: true,
         isRead: true,
         post: 'pahepivh902480284',
-        postType: 'text'
+        postType: PostType.TEXT
+      }
+    ]
+  },
+  {
+    _id: '0482ourbouvbrob92929',
+    recipients: ['charles@gmail.com'],
+    messages: [
+      {
+        _id: '3838498595375937hah',
+        type: MessageType.TEXT,
+        text: 'Beo you good?',
+        date: new Date(),
+        sender: 'gokebello@gmail.com',
+        isSent: true,
+        isDelivered: true,
+        isRead: true
+      },
+      {
+        _id: '917492497294729',
+        type: MessageType.TEXT,
+        text: 'Yeah i am',
+        date: new Date(),
+        sender: 'charles@gmail.com',
+        isSent: true,
+        isDelivered: true,
+        isRead: true,
+      },
+      {
+        _id: 'euueuriroiroprppeo',
+        type: MessageType.MEDIA,
+        text: 'See this babe',
+        date: new Date(),
+        sender: 'charles@gmail.com',
+        isDelivered: true,
+        isRead: true,
+        isSent: true,
+        media: 'IMG_2132.JPG',
+        mediaType: MediaType.IMAGE
+      },
+      {
+        _id: '90824h2ih4ib242',
+        type: MessageType.TEXT,
+        text: 'Mad. The babe make',
+        date: new Date(),
+        sender: 'gokebello@gmail.com',
+        isDelivered: true,
+        isRead: true,
+        isSent: true,
+        reply: 'euueuriroiroprppeo'
+      },
+      {
+        _id: 'ubebavevbaeoubv',
+        type: MessageType.MEDIA,
+        text: 'See this one',
+        date: new Date(),
+        sender: 'gokebello@gmail.com',
+        isDelivered: true,
+        isRead: true,
+        isSent: true,
+        media: 'IMG_2134.JPG',
+        mediaType: MediaType.IMAGE
+      },
+      {
+        _id: 'qpieqpurqrwri',
+        type: MessageType.MEDIA,
+        text: '',
+        date: new Date(),
+        sender: 'gokebello@gmail.com',
+        isDelivered: true,
+        isRead: true,
+        isSent: true,
+        media: 'IMG_5696.JPG',
+        mediaType: MediaType.IMAGE
       }
     ]
   }

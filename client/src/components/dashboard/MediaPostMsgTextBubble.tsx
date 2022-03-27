@@ -3,18 +3,18 @@
 
 import { useContext } from "react";
 import { DataContext } from "../../context/MainContext";
-import { Message, PostMessage, ContactMessage, MessageType } from '../../types/ConversationTypes.types';
+import { PostMessage, ContactMessage, MessageType, PostMediaMessageType, Message } from '../../types/ConversationTypes.types';
 import toUpperFirst from "../../lib/toUpperFirst";
-import { Post } from "../../types/PostType.type";
+import { PostMediaType } from "../../types/PostType.type";
 
 type MediaPostMsgTextBubbleProps = {
   from: 'user' | 'other',
-  message: PostMessage,
+  message: PostMediaMessageType,
   reply?: Message | ContactMessage | PostMessage | null,
   showMessage: (data: string) => void,
   setReplyState: (data: Message | PostMessage | ContactMessage) => void,
   point?: React.LegacyRef<HTMLDivElement> | null,
-  postMsg: Post | undefined
+  postMsg: PostMediaType
 }
 
 export default function MediaPostMsgTextBubble({ 

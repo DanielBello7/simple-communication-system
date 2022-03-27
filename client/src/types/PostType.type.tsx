@@ -1,32 +1,33 @@
 
 
 
-export enum PostType { TEXT, MEDIA }
+import { MediaType } from "./GeneralTypes.types"
 
-export enum MediaType {AUIDO, VIDEO, IMAGE}
+export enum PostType { TEXT, MEDIA }
 
 export type Comment = {
   text: string,
   date: Date,
-  createdBy: {
-    email: string,
-    name: string
-  }
+  createdBy: { email: string, name: string }
 }
 
-export type Post = {
+type Post = {
   _id: string,
-  createdBy: {
-    email: string, 
-    first_name: string,
-    last_name: string
-  },
-  text: string,
-  type: PostType.TEXT | PostType.MEDIA, 
-  media?: string,
-  mediaType?: MediaType.AUIDO | MediaType.IMAGE | MediaType.VIDEO,
+  createdBy: { email: string, first_name: string, last_name: string },
   date: Date,
-  comments?: Comment[],
+  comments: Comment[],
   likes: number,
   dislikes: number
+}
+
+export interface PostTextType extends Post {
+  text: string,
+  type: PostType.TEXT
+}
+
+export interface PostMediaType extends Post {
+  text?: string,
+  type: PostType.MEDIA,
+  mediaType: MediaType.AUDIO | MediaType.VIDEO | MediaType.IMAGE,
+  media: string
 }

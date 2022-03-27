@@ -2,11 +2,11 @@
 
 
 import { useContext } from "react";
-import { Message, PostMessage, ContactMessage } from "../../types/ConversationTypes.types";
+import { PostMessage, ContactMessage, Message } from "../../types/ConversationTypes.types";
 import { UserContext } from '../../context/UserContext';
 import UserTextBubble from "./UserTextBubble";
 import OtherTextBubble from "./OtherTextBubble";
-
+ 
 type TextBubbleProps = {
   message: Message | PostMessage | ContactMessage,
   reply?: Message | PostMessage | ContactMessage | null,

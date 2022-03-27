@@ -18,6 +18,7 @@ type UserTextBubbleProps = {
 
 export default function UserTextBubble({ message, reply, showMessage, setReplyState, point }: UserTextBubbleProps) {
   const { theme } = useContext(DataContext);
+
   if (message.type === MessageType.POST) 
     return <PostMessageTextBubble sender='user' 
                                   message={message} 

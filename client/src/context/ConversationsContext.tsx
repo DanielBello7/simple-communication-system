@@ -16,7 +16,6 @@ import { chats } from '../temp/Conversations';
 
 const initialState: InitialStateType = chats;
 
-
 function reducer(state: InitialStateType, action: ReducerActionType) {
   switch (action.type){
     case ConversationActions.CREATE_CONVERSATION:
@@ -51,6 +50,8 @@ function reducer(state: InitialStateType, action: ReducerActionType) {
 }
 
 export const ConversationsContext = React.createContext<ConversationsContextType>({} as ConversationsContextType);
+
+
 
 export function ConversationsContextProvider(props: ConversationsContextPropsType) {
   const [state, dispatch] = useReducer(reducer, initialState);

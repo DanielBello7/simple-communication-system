@@ -1,11 +1,12 @@
 
-
+ 
 
 import { useContext } from "react";
-import { Message, PostMessage, ContactMessage } from '../../types/ConversationTypes.types';
+import { PostMessage, ContactMessage, Message } from '../../types/ConversationTypes.types';
 import { PostsContext } from '../../context/PostsContext';
 import MediaPostMsgTextBubble from "./MediaPostMsgTextBubble";
 import TextPostMsgTextBubble from "./TextPostMsgTextBubble";
+import { PostType } from "../../types/PostType.type";
 
 type PostMessageTextBubbleType = {
   sender: "user" | "other",
@@ -25,11 +26,12 @@ export default function PostMessageTextBubble({
   point 
 }: PostMessageTextBubbleType) {
   const { state } = useContext(PostsContext);
-  
   const postMsg = state.find(post => post._id === message.post);
+  
+  if(!postMsg) return null;
 
-  if (sender==='user'){
-    if (message.postType === 'media') 
+  if (sender === 'user'){
+    if (message.postType === PostType.MEDIA && postMsg.type === PostType.MEDIA) 
       return <MediaPostMsgTextBubble from="user" 
                                      postMsg={postMsg} 
                                      reply={reply} 
@@ -37,16 +39,18 @@ export default function PostMessageTextBubble({
                                      setReplyState={setReplyState} 
                                      point={point} 
                                      message={message}/>
-    else return <TextPostMsgTextBubble from="user"
-                                       postMsg={postMsg} 
-                                       reply={reply} 
-                                       showMessage={showMessage} 
-                                       setReplyState={setReplyState} 
-                                       point={point} 
-                                       message={message}/>
+    if (message.postType === PostType.TEXT && postMsg.type === PostType.TEXT)
+      return <TextPostMsgTextBubble from="user"
+                                    postMsg={postMsg} 
+                                    reply={reply} 
+                                    showMessage={showMessage} 
+                                    setReplyState={setReplyState} 
+                                    point={point} 
+                                    message={message}/>
+    else return null;
   }
   else {
-    if (message.postType === 'media') 
+    if (message.postType === PostType.MEDIA && postMsg.type === PostType.MEDIA) 
     return <MediaPostMsgTextBubble from="other" 
                                    postMsg={postMsg} 
                                    reply={reply} 
@@ -54,12 +58,14 @@ export default function PostMessageTextBubble({
                                    setReplyState={setReplyState} 
                                    point={point} 
                                    message={message}/>
-    else return <TextPostMsgTextBubble from="other" 
+    if (message.postType === PostType.TEXT && postMsg.type === PostType.TEXT)
+      return <TextPostMsgTextBubble from="other" 
                                        postMsg={postMsg} 
                                        reply={reply} 
                                        showMessage={showMessage} 
                                        setReplyState={setReplyState} 
                                        point={point} 
                                        message={message}/>
+    else return null;
   }
 }
