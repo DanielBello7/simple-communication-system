@@ -8,16 +8,26 @@ import NewPostModal from './NewPostModal';
 import NewContactModal from './NewContactModal';
 import NewConversationModal from './NewConversationModal';
 import EditProfileModal from './EditProfileModal';
+import SettingsModal from './SettingsModal';
+import MoreInfoModal from './MoreInfoModal';
+import DeleteConversationModal from './DeleteConversationModal';
+import SharePostModal from './SharePostModal';
+import ShareContactModal from './ShareContactModal';
 
 export default function Modals() {
   return (
     <React.Fragment>
-    <AlertModal />
-    <LogoutModal />
-    <NewContactModal />
-    <NewPostModal />
-    <NewConversationModal />
-    <EditProfileModal />
+      <AlertModal />
+      <LogoutModal />
+      <NewContactModal />
+      <NewPostModal />
+      <NewConversationModal />
+      <EditProfileModal />
+      <SettingsModal />
+      <MoreInfoModal />
+      <DeleteConversationModal />
+      <SharePostModal />
+      <ShareContactModal />
     </React.Fragment>
   )
 }

@@ -9,7 +9,7 @@ import { DataContext } from "../../context/MainContext";
 
 export default function ContactScreen() {
   const contact = useContext(ContactsContext);
-  const { theme } = useContext(DataContext);
+  const { theme, showToast } = useContext(DataContext);
 
   return (
     <div id='contact-screen'>
@@ -28,13 +28,16 @@ export default function ContactScreen() {
         <p>{contact.selectedContact.email}</p>
         
         <div className="btn-group btn-group-lg" role="group" aria-label="Basic outlined example">
-          <button type="button" className="btn btn-outline-primary">
+          <button type="button" className="btn btn-outline-primary" onClick={() => showToast('Not available yet')}>
             <i className="fas fa-phone" />
           </button>
           <button type="button" className="btn btn-outline-primary">
             <i className="fas fa-comment" />
           </button>
-          <button type="button" className="btn btn-outline-primary">
+          <button type="button" 
+                  className="btn btn-outline-primary" 
+                  data-bs-toggle="modal" 
+                  data-bs-target="#shareContactModal">
             <i className="fas fa-share" />
           </button>
         </div>

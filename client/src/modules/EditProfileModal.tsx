@@ -38,7 +38,7 @@ export default function EditProfileModal() {
          tabIndex={-1} 
          aria-labelledby="editProfileModal" 
          aria-hidden="true">
-    <div className="modal-dialog modal-dialog-centered">
+    <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div className="modal-content">
       <div className={`modal-header ${theme.title === 'dark' ? 'bg-primary text-white' : ''}`}>
       <h2 className="modal-title" id="exampleModalLabel">Edit Profile</h2>
@@ -90,7 +90,7 @@ export default function EditProfileModal() {
                 form='editProfileForm'>Close</button>
         <button type="button" 
                 onClick={handleClick}
-                className="btn btn-primary">Post</button>
+                className="btn btn-primary">Update</button>
       </div>
   </div>
   </div>

@@ -30,7 +30,7 @@ export default function NewContactModal() {
          tabIndex={-1} 
          aria-labelledby="newContactModal" 
          aria-hidden="true">
-    <div className="modal-dialog modal-dialog-centered">
+    <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div className="modal-content">
       <div className={`modal-header ${theme.title==='dark'?'bg-primary text-white':''}`}>
       <h2 className="modal-title" id="newContactLabel">Add a new contact</h2>

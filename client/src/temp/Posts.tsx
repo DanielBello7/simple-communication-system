@@ -5,7 +5,7 @@ import { Post, PostType, MediaType } from "../types/PostType.type";
 
 export const posts_data: Post[] = [
   {
-    _id: 'aoeubaobevae',
+    _id: '8130717ouabeovbua',
     createdBy: {
       email: 'gokebello@gmail.com',
       first_name: 'goke',
@@ -35,7 +35,7 @@ export const posts_data: Post[] = [
     ]
   },
   {
-    _id: 'aoeubaobevae',
+    _id: 'pahepivh902480284',
     createdBy: {
       email: 'benjamin@gmail.com',
       first_name: 'benjamin',
@@ -65,7 +65,7 @@ export const posts_data: Post[] = [
     ]
   },
   {
-    _id: 'aoeubaobevae',
+    _id: 'lauboue0001',
     createdBy: {
       email: 'benjamin@gmail.com',
       first_name: 'benjamin',
@@ -117,7 +117,7 @@ export const posts_data: Post[] = [
     ]
   },
   {
-    _id: 'aoeubaobevae',
+    _id: '914740274;akdac',
     createdBy: {
       email: 'anita@gmail.com',
       first_name: 'anita',
@@ -137,7 +137,7 @@ export const posts_data: Post[] = [
     ]
   },
   {
-    _id: 'aoeubaobevae',
+    _id: '974047204cboabeoaobe',
     createdBy: {
       email: 'joy@gmail.com',
       first_name: 'joy',
@@ -162,7 +162,7 @@ export const posts_data: Post[] = [
     ]
   },
   {
-    _id: 'aoeubaobevae',
+    _id: 'aoubevoabeobvuo2u4o24o20482',
     createdBy: {
       email: 'glory@gmail.com',
       first_name: 'glory',
@@ -177,7 +177,7 @@ export const posts_data: Post[] = [
     dislikes: 22,
   },
   {
-    _id: 'aoeubaobevae',
+    _id: 'auebaoebv0181-8-13boaube',
     createdBy: {
       email: 'gokebello@gmail.com',
       first_name: 'goke',

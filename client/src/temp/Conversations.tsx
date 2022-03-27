@@ -146,5 +146,110 @@ export const chats: Conversation[] = [
         reply: 'aoubeoaibveqoubq3q93q'
       }
     ]
+  },
+  {
+    _id: 'yiaeiaieyaie',
+    recipients: ['juliet@gmail.com'],
+    messages: [
+      {
+        _id: 'aoueoavoooaoao',
+        type: MessageType.TEXT,
+        text: 'Hey Daniel',
+        date: new Date(),
+        sender: 'juliet@gmail.com',
+        isSent: true,
+        isDelivered: true,
+        isRead: true
+      },
+      {
+        _id: 'ao9oq0081308aeaeq803yq3',
+        type: MessageType.TEXT,
+        text: 'Hi, How are you?',
+        date: new Date(),
+        sender: 'gokebello@gmail.com',
+        isSent: true,
+        isDelivered: true,
+        isRead: true,
+        reply: 'aoueoavoooaoao'
+      },
+      {
+        _id: 'ii0183018308bcoauevcae',
+        type: MessageType.POST,
+        text: 'Can you see this?',
+        date: new Date(),
+        sender: 'juliet@gmail.com',
+        isSent: true,
+        isDelivered: true,
+        isRead: true,
+        reply: 'ao9oq0081308aeaeq803yq3',
+        post: 'lauboue0001',
+        postType: 'media'
+      },
+      {
+        _id: '901030801083180',
+        type: MessageType.TEXT,
+        text: 'Yeah i saw it?',
+        date: new Date(),
+        sender: 'gokebello@gmail.com',
+        isSent: true,
+        isDelivered: true,
+        isRead: true,
+      },
+      {
+        _id: 'iiei9993kdkdk',
+        type: MessageType.POST,
+        text: 'Yeah see this one sef',
+        date: new Date(),
+        sender: 'gokebello@gmail.com',
+        isSent: true,
+        isDelivered: true,
+        isRead: true,
+        reply: 'ii0183018308bcoauevcae',
+        post: 'aoubevoabeobvuo2u4o24o20482',
+        postType: 'media'
+      }
+    ]
+  },
+  {
+    _id: '942-94-240810',
+    recipients: ['andrew@gmail.com'],
+    messages: [
+      {
+        _id: '20482048ippiepwirwpir',
+        contact: {
+          email: 'jessica@gmail.com',
+          first_name: 'jessica',
+          last_name: 'jones'
+        },
+        type: MessageType.CONTACT,
+        date: new Date(),
+        sender: 'andrew@gmail.com',
+        isSent: true,
+        isRead: true,
+        isDelivered: true,
+      },
+      {
+        _id: '840284028473071',
+        type: MessageType.TEXT,
+        text: 'Guy hafa',
+        date: new Date(),
+        sender: 'gokebello@gmail.com',
+        isSent: true,
+        isDelivered: true,
+        isRead: true
+      },
+      {
+        _id: 'iiei9993kdkdk',
+        type: MessageType.POST,
+        text: 'See me',
+        date: new Date(),
+        sender: 'gokebello@gmail.com',
+        isSent: true,
+        isDelivered: true,
+        isRead: true,
+        post: 'pahepivh902480284',
+        postType: 'text'
+      }
+    ]
   }
 ]

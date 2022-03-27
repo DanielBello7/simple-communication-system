@@ -13,7 +13,7 @@ export default function AlertModal() {
          tabIndex={-1} 
          aria-labelledby="exampleModalLabel" 
          aria-hidden="true">
-    <div className="modal-dialog modal-dialog-centered">
+    <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div className="modal-content">
       <div className={`modal-header ${dataContext.theme.title === 'dark' ? 'bg-primary' : ''}`}>
         <h4 className="modal-title" id="exampleModalLabel"><strong>Alert!!!</strong></h4>

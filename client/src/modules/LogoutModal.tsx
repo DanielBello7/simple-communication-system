@@ -15,7 +15,7 @@ export default function LogoutModal() {
          data-bs-keyboard="false"
          aria-labelledby="lgloutModalLabel" 
          aria-hidden="true">
-    <div className="modal-dialog">
+    <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div className="modal-content">
       <div className={`modal-header ${dataContext.theme.title==='dark'?'bg-primary':''} ${dataContext.theme.text}`}>
         <h5 className="modal-title" id="exampleModalLabel">Logout</h5>

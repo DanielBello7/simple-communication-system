@@ -31,7 +31,7 @@ export default function NewPostModal() {
          tabIndex={-1} 
          aria-labelledby="newPostModal" 
          aria-hidden="true">
-    <div className="modal-dialog">
+    <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div className="modal-content">
       <div className={`modal-header ${theme.title === 'dark' ? 'bg-primary text-white' : ''}`}>
       <h2 className="modal-title" id="exampleModalLabel">What's happenining?</h2>

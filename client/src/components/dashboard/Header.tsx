@@ -13,11 +13,6 @@ export default function Header(){
     border: dataContext.theme.title === 'light' ? '1px solid black' : ''
   }
 
-  const inputStyle = {
-    border: dataContext.theme.title === 'light' ? '1px solid whitesmoke' : '',
-    padding: '0px',
-  }
-
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const searchItem = searchRef.current?.value;
@@ -62,8 +57,7 @@ export default function Header(){
         </button>
         <ul className={`dropdown-menu ${dataContext.theme.title === 'dark' ? 'dropdown-menu-dark' : ''}`} 
             aria-labelledby="navbarDarkDropdownMenuLink">
-          <li><button className="dropdown-item">Settings</button></li>
-          <li><button className="dropdown-item">User Account</button></li>
+          <li><button className="dropdown-item" data-bs-toggle="modal" data-bs-target="#settingsModal">Settings</button></li>
           <li className='px-3'>
             <div className="form-check form-switch">
               <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Dark Mode</label>

@@ -6,7 +6,7 @@ import TextBubble from "./TextBubble"
 import ComponentLoader from "../ComponentLoader";
 import { ConversationsContext } from "../../context/ConversationsContext";
 import { DataContext } from "../../context/MainContext";
-import { Message } from '../../types/ConversationTypes.types';
+import { ContactMessage, Message, PostMessage } from '../../types/ConversationTypes.types';
 
 
 export default function ChatScreen() {
@@ -14,7 +14,7 @@ export default function ChatScreen() {
   const convo = useContext(ConversationsContext);
   const textRef = useRef<HTMLTextAreaElement>(null);
   const { theme } = useContext(DataContext);
-  const [replyMsg, setReplyMsg] = useState<Message | null>(null);
+  const [replyMsg, setReplyMsg] = useState<Message | PostMessage | ContactMessage | null>(null);
 
   const setRef = useCallback((node): void => {
     if (node) node.scrollIntoView();
@@ -73,7 +73,7 @@ export default function ChatScreen() {
       </textarea>
       <label htmlFor="floatingTextarea2 text-truncate" id="label-header">
         <span className="text-truncate">
-        {!replyMsg ? 'Write Something...': `Replying: ${replyMsg.text}`}
+        {!replyMsg ? 'Write Something...': `Replying: ${replyMsg.text ? replyMsg.text : "Post"}`}
         </span>
       </label>
       </div>

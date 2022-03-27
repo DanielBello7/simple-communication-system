@@ -29,7 +29,7 @@ export default function ContactTile({ contact, index, handleClick, selected }: C
            height: '50px'
       }}/>
       </div>
-      <div className={`col-10 px-2 nav-link p-0 m-0 ${selected === index ? "active" : ""}`} id='contact-1'
+      <div className={`col-10 px-xl-0 px-lg-4 px-md-4 nav-link p-0 m-0 ${selected === index ? "active" : ""}`} id='contact-1'
            aria-current={selected === index ? "page" : "false"}>
       <div className={`row p-0 m-0 ${theme.text}`} id="name-contact">
         {`${toUpperFirst(contact.first_name)} ${toUpperFirst(contact.last_name)}`}

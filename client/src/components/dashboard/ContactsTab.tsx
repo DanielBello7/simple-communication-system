@@ -40,10 +40,10 @@ export default function ContactsTab() {
   });
 
   return (
-    <div className="nav w-100 h-100 d-flex flex-column overflow-scroll position-relative" id="scroll-container">
+    <div className="nav w-100 h-100 d-flex flex-column overflow-scroll" id="scroll-container">
       { contactsLoading ? <ComponentLoader /> : chatsOutput }
-      <div className={`position-sticky ${contacts.state.length > 6 ? 'bottom-0' : 'top-100'} end-0`}>
-      <button className='btn bg-primary mb-3 shadow rounded-circle p-0 text-white' 
+      <div className={`position-sticky w-100 ${contacts.state.length > 6 ? 'bottom-0' : 'top-100'} end-0`}>
+      <button className='btn bg-primary mb-3 mx-2 shadow rounded-circle p-0 text-white' 
               style={{width: '50px', height: '50px'}}
               data-bs-toggle="modal" 
               data-bs-target="#newContactModal"
@@ -54,3 +54,4 @@ export default function ContactsTab() {
     </div>
   )
 }
+
