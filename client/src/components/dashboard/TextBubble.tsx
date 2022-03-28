@@ -13,7 +13,7 @@ type TextBubbleProps = {
   showMessage: (id: string | undefined) => void,
   point?: React.LegacyRef<HTMLDivElement> | null,
   setReplyMsg: React.Dispatch<React.SetStateAction<Message | PostMessage | ContactMessage  | null>>
-}
+} 
 
 export default function TextBubble(props: TextBubbleProps){
   const user = useContext(UserContext);
