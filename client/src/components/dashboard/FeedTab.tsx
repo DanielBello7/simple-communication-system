@@ -4,20 +4,18 @@
 import { useState, useContext } from 'react';
 import ComponentLoader from '../ComponentLoader';
 import FeedItem from './FeedItem';
-import { Screen } from './Dashboard';
+import { Screen } from '../../types/GeneralTypes.types';
 import { PostsContext } from '../../context/PostsContext';
+import { DataContext } from '../../context/MainContext';
 
-type FeedTabProps = {
-  setActiveScreen: React.Dispatch<React.SetStateAction<Screen>>
-}
 
-export default function FeedTab(props: FeedTabProps) {
-  const [feedLoading, setFeedLoading] = useState(false);
+export default function FeedTab() {
   const [selected, setSelected] = useState<number>(0);
   const { state, setSelectedPost } = useContext(PostsContext);
+  const { setActiveScreen, feedLoading } = useContext(DataContext);
 
   const handleClick = (post: number) => {
-    props.setActiveScreen(Screen.POST);
+    setActiveScreen(Screen.POST);
     setSelected(post);
     setSelectedPost(post);
   }

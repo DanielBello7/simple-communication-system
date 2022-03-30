@@ -3,9 +3,17 @@
 
 import { useContext } from "react";
 import { DataContext } from "../../context/MainContext";
-import { PostMessage, ContactMessage, MessageType, PostMediaMessageType, Message } from '../../types/ConversationTypes.types';
 import toUpperFirst from "../../lib/toUpperFirst";
 import { PostMediaType } from "../../types/PostType.type";
+import { Screen } from '../../types/GeneralTypes.types';
+import { PostsContext } from '../../context/PostsContext';
+import { 
+  PostMessage, 
+  ContactMessage, 
+  MessageType, 
+  PostMediaMessageType, 
+  Message 
+} from '../../types/ConversationTypes.types';
 
 type MediaPostMsgTextBubbleProps = {
   from: 'user' | 'other',
@@ -14,7 +22,7 @@ type MediaPostMsgTextBubbleProps = {
   showMessage: (data: string) => void,
   setReplyState: (data: Message | PostMessage | ContactMessage) => void,
   point?: React.LegacyRef<HTMLDivElement> | null,
-  postMsg: PostMediaType
+  postMsg: PostMediaType,
 }
 
 export default function MediaPostMsgTextBubble({ 
@@ -23,9 +31,15 @@ export default function MediaPostMsgTextBubble({
   showMessage,
   point, 
   message, 
-  postMsg 
+  postMsg
 }: MediaPostMsgTextBubbleProps) {
-  const { theme } = useContext(DataContext);
+  const { theme, setActiveScreen } = useContext(DataContext);
+  const { selectActivePost } = useContext(PostsContext);
+
+  const openSelectedPost = (id: string): void => {
+    selectActivePost(id);
+    setActiveScreen(Screen.GENERAL);
+  }
 
   if (from === "user") {
     return (
@@ -52,7 +66,7 @@ export default function MediaPostMsgTextBubble({
         </p>  
         <h5 className="card-title text-primary">{postMsg?.createdBy.email}</h5>
         <p className="card-text text-truncate">{postMsg?.text}</p>
-        <button className="btn btn-outline-primary btn-sm" onClick={() => alert(message.post)}>See more</button>
+        <button className="btn btn-outline-primary btn-sm" onClick={() => openSelectedPost(postMsg._id)}>See more</button>
         </div>
 
         <div className={`card-footer text-muted ${theme.title==='dark'?'bg-black bg-opacity-75':''}`}>
@@ -103,7 +117,7 @@ export default function MediaPostMsgTextBubble({
       </p>  
       <h5 className="card-title text-primary">{postMsg?.createdBy.email}</h5>
       <p className="card-text text-truncate">{postMsg?.text}</p>
-      <button className="btn btn-outline-primary btn-sm" onClick={() => alert(message.post)}>See more</button>
+      <button className="btn btn-outline-primary btn-sm" onClick={() => openSelectedPost(postMsg._id)}>See more</button>
       </div>
 
       <div className={`card-footer text-muted ${theme.title==='dark'?'bg-black bg-opacity-75':''}`}>

@@ -6,6 +6,8 @@ import { DataContext } from "../../context/MainContext";
 import { Message, PostMessage, ContactMessage, MessageType, PostTextMessageType } from '../../types/ConversationTypes.types';
 import toUpperFirst from "../../lib/toUpperFirst";
 import { PostTextType } from "../../types/PostType.type";
+import { PostsContext } from '../../context/PostsContext';
+import { Screen } from "../../types/GeneralTypes.types";
 
 type TextPostMsgTextBubbleProps = {
   from: 'user' | 'other',
@@ -25,7 +27,14 @@ export default function TextPostMsgTextBubble({
   point,
   postMsg
 }: TextPostMsgTextBubbleProps) {
-  const { theme } = useContext(DataContext);
+  const { theme, setActiveScreen } = useContext(DataContext);
+  const { selectActivePost } = useContext(PostsContext);
+
+  const openSelectedPost = (id: string) => {
+    selectActivePost(id);
+    return setActiveScreen(Screen.GENERAL);
+  }
+  
   const fullname = `${toUpperFirst(postMsg.createdBy.first_name)} ${toUpperFirst(postMsg.createdBy.last_name)}`;
   if (from === 'user') {
     return (
@@ -55,7 +64,7 @@ export default function TextPostMsgTextBubble({
           <p className={`${theme.title==='dark'?'text-white':'text-muted'}`}>
           <small>{postMsg?.date.toDateString()}</small>
           </p>
-          <button className="btn btn-outline-primary">See more</button>
+          <button className="btn btn-outline-primary" onClick={() => openSelectedPost(postMsg._id)}>See more</button>
         </div>
         </div>
         {
@@ -100,7 +109,7 @@ export default function TextPostMsgTextBubble({
         <p className={`${theme.title==='dark'?'text-white':'text-muted'}`}>
         <small>{postMsg?.date.toDateString()}</small>
         </p>
-        <button className="btn btn-outline-primary">See more</button>
+        <button className="btn btn-outline-primary" onClick={() => openSelectedPost(postMsg._id)}>See more</button>
       </div>
       </div>
       {

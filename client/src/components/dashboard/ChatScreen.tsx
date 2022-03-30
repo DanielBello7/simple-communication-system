@@ -11,10 +11,9 @@ import { ContactMessage, Message, PostMessage } from '../../types/ConversationTy
 
 export default function ChatScreen() {
   const [replyMsg, setReplyMsg] = useState<Message | PostMessage | ContactMessage | null>(null);
-  const [chatLoading, setChatLoading] = useState(false);
   const textRef = useRef<HTMLTextAreaElement>(null);
   const { selectedConversation } = useContext(ConversationsContext);
-  const { theme } = useContext(DataContext);
+  const { theme, chatLoading } = useContext(DataContext);
 
 
   const setRef = useCallback((node): void => {
@@ -80,7 +79,7 @@ export default function ChatScreen() {
         </span>
       </label>
       </div>
-      <button className={`btn btn-outline-black ${theme.text} chat-sub-but`}>
+      <button className={`btn btn-outline-black ${theme.text} ${theme.title==='dark'&&'bg-primary'} chat-sub-but`}>
       <i className="fas fa-paper-plane fa-lg"/>  
       </button>
       </form>

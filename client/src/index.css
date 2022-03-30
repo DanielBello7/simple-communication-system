@@ -411,7 +411,8 @@ input[type="checkbox"] {
 
 .post-msg-me,
 .text-post-me,
-.contact-card-me {
+.contact-card-me,
+.media-message-me {
   display: flex;
   flex-direction: column;
   align-self: flex-end;
@@ -424,7 +425,8 @@ input[type="checkbox"] {
 
 .post-msg,
 .text-post,
-.contact-card {
+.contact-card,
+.media-message {
   display: flex;
   flex-direction: column;
   align-self: flex-start;
@@ -441,20 +443,15 @@ input[type="checkbox"] {
   transition: 0.4s ease all;
 }
 
-.post-msg-card:hover,
-.text-post-card:hover,
-.contact-card-card:hover {
-  transition: 0.4s ease all;
-  opacity: 0.6;
-}
-
 @media (max-width: 1027px) {
   .post-msg-me,
   .post-msg,
   .text-post,
   .text-post-me,
   .contact-card,
-  .contact-card-me {
+  .contact-card-me,
+  .media-message-me,
+  .media-message {
     width: 80%;
   }
 }
@@ -475,6 +472,17 @@ input[type="checkbox"] {
 }
 
 .contact-card-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.media-message-me:hover,
+.media-message:hover {
+  opacity: 0.8;
+}
+
+.modal-img {
   width: 100%;
   height: auto;
   object-fit: cover;

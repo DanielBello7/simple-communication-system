@@ -1,7 +1,7 @@
 
 
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { PostsContext } from "../../context/PostsContext";
 import { PostType } from "../../types/PostType.type";
 import MediaPost from "./MediaPost";
@@ -12,9 +12,7 @@ import ComponentLoader from "../ComponentLoader";
 import { DataContext } from "../../context/MainContext";
 
 export default function PostScreen() {
-  const [commentsLoading, setCommentsLoading] = useState(false);
-  const [postLoading, setPostLoading] = useState(false);
-  const { theme } = useContext(DataContext);
+  const { theme, postLoading, commentsLoading } = useContext(DataContext);
   const { selectedPost } = useContext(PostsContext);
 
   const comments = selectedPost?.comments.map((comment, index) => {

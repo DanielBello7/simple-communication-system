@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import { DarkTheme, LightTheme, Theme } from '../modules/Themes';
 import { Modal, Toast } from 'bootstrap';
+import { Screen, Tabs } from '../types/GeneralTypes.types';
 
 type DataContextProps = {
   children: React.ReactNode
@@ -21,7 +22,25 @@ type DataContextType = {
   theme: Theme,
   changeTheme: Function,
   search: Function,
-  setMode: React.Dispatch<React.SetStateAction<boolean>>
+  setMode: React.Dispatch<React.SetStateAction<boolean>>,
+  activeScreen: Screen,
+  setActiveScreen: React.Dispatch<React.SetStateAction<Screen>>,
+  activeTab: Tabs,
+  setActiveTab: React.Dispatch<React.SetStateAction<Tabs>>,
+  chatLoading: boolean,
+  setChatLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  chatsLoading: boolean,
+  setChatsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  contactsLoading: boolean,
+  setContactsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  feedLoading: boolean,
+  setFeedLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  commentsLoading: boolean,
+  setCommentsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  postLoading: boolean,
+  setPostLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  modalImage: string | null,
+  setModalImage:  React.Dispatch<React.SetStateAction<string | null>>
 }
 
 const address = "http://localhost:5050";
@@ -33,6 +52,15 @@ export function DataContextProvider(props: DataContextProps) {
   const [alertMsg, setAlertMsg] = useState("");
   const [toastMsg, setToastMsg] = useState("");
   const [isLight, setIsLight] = useState(true);
+  const [activeScreen, setActiveScreen] = useState<Screen>(Screen.DEFAULT);
+  const [activeTab, setActiveTab] = useState(Tabs.HOME);
+  const [chatLoading, setChatLoading] = useState(false);
+  const [chatsLoading, setChatsLoading] = useState(false);
+  const [contactsLoading, setContactsLoading] = useState(false);
+  const [feedLoading, setFeedLoading] = useState(false);
+  const [commentsLoading, setCommentsLoading] = useState(false);
+  const [postLoading, setPostLoading] = useState(false);
+  const [modalImage, setModalImage] = useState<string | null>(null);
 
   if (isLight) {
     document.body.classList.remove(`${DarkTheme.text}`);
@@ -66,7 +94,21 @@ export function DataContextProvider(props: DataContextProps) {
     <DataContext.Provider value={{
       isLoading,
       setLoading,
+      postLoading,
+      setPostLoading,
+      commentsLoading,
+      setCommentsLoading,
+      contactsLoading,
+      modalImage,
+      setModalImage,
+      setContactsLoading,
       address,
+      feedLoading,
+      setFeedLoading,
+      chatsLoading,
+      setChatsLoading,
+      chatLoading,
+      setChatLoading,
       alertMsg,
       showAlert,
       toastMsg,
@@ -75,7 +117,11 @@ export function DataContextProvider(props: DataContextProps) {
       showToast,
       setMode: setIsLight,
       search,
-      isLight
+      isLight,
+      activeScreen,
+      setActiveScreen,
+      activeTab,
+      setActiveTab
     }}>
       {props.children}
     </DataContext.Provider>

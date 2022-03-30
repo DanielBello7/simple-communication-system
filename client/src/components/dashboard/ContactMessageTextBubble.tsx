@@ -3,9 +3,15 @@
 
 import { useContext } from "react";
 import { DataContext } from "../../context/MainContext";
-import { Message, PostMessage, ContactMessage, MessageType } from '../../types/ConversationTypes.types';
 import img from '../../img/IMG_2135.JPG';
 import toUpperFirst from "../../lib/toUpperFirst";
+import { ContactsContext } from "../../context/ContactsContext";
+import { 
+  Message, 
+  PostMessage, 
+  ContactMessage, 
+  MessageType 
+} from '../../types/ConversationTypes.types';
 
 type ContactMessageTextBubbleType = {
   sender: "user" | "other",
@@ -23,8 +29,15 @@ export default function ContactMessageTextBubble({
   showMessage,
   point 
 }: ContactMessageTextBubbleType) {
-  const { theme } = useContext(DataContext);
   const fullname = `${toUpperFirst(message.contact.first_name)} ${toUpperFirst(message.contact.last_name)}`;
+  const { theme } = useContext(DataContext);
+  const { state } = useContext(ContactsContext);
+
+  const handleClick = () => {
+    if (state.includes(message.contact)) return null;
+    else alert("Contact added");
+  }
+
   if(sender === "user"){
     return (
       <div className="contact-card-me">
@@ -55,7 +68,9 @@ export default function ContactMessageTextBubble({
           </p>
           <h5 className="card-title text-primary h3">{fullname}</h5>
           <p className="card-text">{message.contact.email}</p>
-          <button className="btn btn-outline-primary">Add contact</button>
+          <button className="btn btn-outline-primary" onClick={() => handleClick()}>
+            { state.includes(message.contact) ? "Added" : "Add contact"}
+          </button>
           </div>
           </div>
         </div>
@@ -109,7 +124,9 @@ export default function ContactMessageTextBubble({
         </p>
         <h5 className="card-title text-primary h3">{fullname}</h5>
         <p className="card-text">{message.contact.email}</p>
-        <button className="btn btn-outline-primary">Add contact</button>
+        <button className="btn btn-outline-primary" onClick={() => handleClick()}>
+          { state.includes(message.contact) ? "Added" : "Add contact"}
+        </button>
         </div>
         </div>
       </div>

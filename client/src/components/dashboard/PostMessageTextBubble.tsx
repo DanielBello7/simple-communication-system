@@ -23,7 +23,7 @@ export default function PostMessageTextBubble({
   reply, 
   showMessage, 
   setReplyState, 
-  point 
+  point
 }: PostMessageTextBubbleType) {
   const { state } = useContext(PostsContext);
   const postMsg = state.find(post => post._id === message.post);
@@ -56,14 +56,14 @@ export default function PostMessageTextBubble({
                                    reply={reply} 
                                    showMessage={showMessage} 
                                    setReplyState={setReplyState} 
-                                   point={point} 
+                                   point={point}
                                    message={message}/>
     if (message.postType === PostType.TEXT && postMsg.type === PostType.TEXT)
       return <TextPostMsgTextBubble from="other" 
                                        postMsg={postMsg} 
                                        reply={reply} 
                                        showMessage={showMessage} 
-                                       setReplyState={setReplyState} 
+                                       setReplyState={setReplyState}
                                        point={point} 
                                        message={message}/>
     else return null;

@@ -2,7 +2,7 @@
 
 
 import { useState, useContext } from 'react';
-import { Screen } from './Dashboard';
+import { Screen } from '../../types/GeneralTypes.types';
 import { ConversationsContext } from '../../context/ConversationsContext';
 import { ContactsContext } from '../../context/ContactsContext';
 import toUpperFirst from '../../lib/toUpperFirst';
@@ -12,20 +12,16 @@ import { UserContext } from '../../context/UserContext';
 import ComponentLoader from '../ComponentLoader';
 import { DataContext } from '../../context/MainContext';
 
-type ChatsProp = {
-  setActiveScreen: React.Dispatch<React.SetStateAction<Screen>>
-}
 
-export default function Chats(props: ChatsProp) {
+export default function Chats() {
   const conversationsContext = useContext(ConversationsContext);
   const contacts = useContext(ContactsContext);
   const userContext = useContext(UserContext);
   const [selected, setSelected] = useState<number | null>(null);
-  const [chatsLoading, setChatsLoading] = useState(false);
-  const { theme } = useContext(DataContext);
+  const { theme, setActiveScreen, chatsLoading } = useContext(DataContext);
 
   const handleClick = (chat: number) => {
-    props.setActiveScreen(Screen.CHAT);
+    setActiveScreen(Screen.CHAT);
     setSelected(chat)
     conversationsContext.setSelectedConversation(chat);
   }
@@ -40,7 +36,11 @@ export default function Chats(props: ChatsProp) {
 					 data-bs-target="#sidebarMenu" 
 					 aria-controls="sidebarMenu" 
            key={chat._id}>
-      <div className="p-0 m-0 w-100 h-100 d-flex">
+      <div className={`p-0 m-0 w-100 h-100 d-flex ${
+        theme.title==='dark'
+        ? selected === index&&"bg-primary bg-opacity-50 text-white"
+        : selected===index&&"bg-dark bg-opacity-100 text-white"
+        }`}>
         <div className="col-3 p-0 m-0">
         <img src={chat.groupName ? img1 : img} 
              className="rounded-start p-1" 
@@ -52,7 +52,8 @@ export default function Chats(props: ChatsProp) {
 
         <div className="col-9 p-0 m-0">
         <div className="card-body p-3 d-flex flex-column justify-content-center w-100 h-100">
-          <h6 className={`card-title mb-0 fw-bold ${selected === index ? "text-primary" : ""}`}>
+          <h6 className={`card-title mb-0 d-flex justify-content-between`}>
+            <span className=''> 
             { 
               chat.groupName 
               ? chat.groupName
@@ -62,8 +63,19 @@ export default function Chats(props: ChatsProp) {
                 return `${toUpperFirst(name?.first_name)} ${toUpperFirst(name?.last_name)}`
               }).join(', ') 
             }
+            </span>
+            <span><small className="text-primary">
+            {
+              chat.messages.map((message, index) => {
+                if (index === (chat.messages.length -1)) return message.date.toLocaleString("en-US", {dateStyle:"short"})
+                return null;
+              })
+            }
+            </small></span>
+            
           </h6>
-          <p className="card-text mb-0 text-truncate p-0"><small>
+          <p className="card-text mb-0 d-flex justify-content-between p-0 text-muted">
+            <span className='col-9 text-truncate pe-2'>
             {
               chat.messages.map((message, index) => {
                 if (index === (chat.messages.length -1)) 
@@ -77,15 +89,19 @@ export default function Chats(props: ChatsProp) {
                 return null;
               })
             }
-          </small></p>
-          <p className="card-text"><small className="text-muted">
-          {
-            chat.messages.map((message, index) => {
-              if (index === (chat.messages.length -1)) return message.date.toDateString();
-              return null;
-            })
-          }
-          </small></p>
+            </span>
+            <span className='col-3 text-end'>
+              {
+                chat.messages.map((message, index) => {
+                  if (index === (chat.messages.length -1))
+                    {
+                      if (message.isDelivered) return <i className='fas fa-check-circle' key={index} />
+                      else return <i className='fas fa-clock' key={index} />
+                    }
+                })
+              }
+            </span>
+          </p>
         </div>
         </div>
       </div>

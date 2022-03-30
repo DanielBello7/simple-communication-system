@@ -15,7 +15,9 @@ export type PostsContextType = {
   state: (PostMediaType | PostTextType)[],
   dispatch: React.Dispatch<ReducerActionType>,
   selectedPost: (PostMediaType | PostTextType) | null,
-  setSelectedPost: React.Dispatch<React.SetStateAction<number>>
+  setSelectedPost: React.Dispatch<React.SetStateAction<number>>,
+  activePost: PostTextType | PostMediaType | null,
+  selectActivePost: (id: string) => void
 }
 
 export type ReducerActionType = {
@@ -46,14 +48,21 @@ const initialState: (PostMediaType | PostTextType)[] = posts_data;
 export const PostsContext = React.createContext<PostsContextType>({} as PostsContextType);
 
 
-
 export function PostsContextProvider(props: PostsPropsType) {
   const [selectedPost, setSelectedPost] = useState<number>(0);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [activePost, setActivePost] = useState<PostTextType | PostMediaType | null>(null);
+
+  const selectActivePost = (id: string): void => {
+    const selected = state.find(post => post._id === id);
+    if (selected) return setActivePost(selected);
+  }
 
   return (
     <PostsContext.Provider value={{
       state,
+      activePost,
+      selectActivePost,
       dispatch,
       selectedPost: state[selectedPost],
       setSelectedPost

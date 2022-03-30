@@ -12,8 +12,7 @@ import { DataContext } from '../../context/MainContext';
 export default function ContactsTab() {
   const contacts = useContext(ContactsContext);
   const [selected, setSelected] = useState<number | null>(null);
-  const [contactsLoading, setContactsLoading] = useState(false);
-  const { theme } = useContext(DataContext);
+  const { theme, contactsLoading } = useContext(DataContext);
 
   const handleClick = (contact: number) => {
     const element = document.getElementById("offcanvasRight")!;
@@ -37,6 +36,7 @@ export default function ContactsTab() {
         </ul>
       </div>
     )
+    return null;
   });
 
   return (

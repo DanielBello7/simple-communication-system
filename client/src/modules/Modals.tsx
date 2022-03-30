@@ -13,6 +13,7 @@ import MoreInfoModal from './MoreInfoModal';
 import DeleteConversationModal from './DeleteConversationModal';
 import SharePostModal from './SharePostModal';
 import ShareContactModal from './ShareContactModal';
+import ImageViewerModal from './ImageViewerModal';
 
 export default function Modals() {
   return (
@@ -28,6 +29,7 @@ export default function Modals() {
       <DeleteConversationModal />
       <SharePostModal />
       <ShareContactModal />
+      <ImageViewerModal />
     </React.Fragment>
   )
 }

@@ -69,7 +69,7 @@ export const chats: Conversation[] = [
         date: new Date(),
         sender: 'gokebello@gmail.com',
         isSent: true,
-        isDelivered: true,
+        isDelivered: false,
         isRead: true,
         reply: 'ouavuvsova'
       },
@@ -205,7 +205,7 @@ export const chats: Conversation[] = [
         date: new Date(),
         sender: 'gokebello@gmail.com',
         isSent: true,
-        isDelivered: true,
+        isDelivered: false,
         isRead: true,
         reply: 'ii0183018308bcoauevcae',
         post: 'aoubevoabeobvuo2u4o24o20482',
@@ -318,7 +318,6 @@ export const chats: Conversation[] = [
       {
         _id: 'qpieqpurqrwri',
         type: MessageType.MEDIA,
-        text: '',
         date: new Date(),
         sender: 'gokebello@gmail.com',
         isDelivered: true,
@@ -326,7 +325,17 @@ export const chats: Conversation[] = [
         isSent: true,
         media: 'IMG_5696.JPG',
         mediaType: MediaType.IMAGE
-      }
+      },
+      {
+        _id: '90824h2ih4ib242081401',
+        type: MessageType.TEXT,
+        text: 'Guyyyy',
+        date: new Date(),
+        sender: 'charles@gmail.com',
+        isDelivered: false,
+        isRead: true,
+        isSent: true
+      },
     ]
   }
 ]

@@ -2,19 +2,15 @@
 
 
 import { useContext } from "react";
-import { Screen } from "./Dashboard";
+import { Screen } from "../../types/GeneralTypes.types";
 import { ConversationsContext } from "../../context/ConversationsContext";
 import { DataContext } from "../../context/MainContext";
 import toUpperFirst from "../../lib/toUpperFirst";
 import { Modal } from "bootstrap";
 
-export type OpenConversationHeaderProps = {
-  activeScreen: Screen
-}
-
-export default function OpenConversationHeader(props: OpenConversationHeaderProps) {
+export default function OpenConversationHeader() {
   const convo = useContext(ConversationsContext);
-  const { theme } = useContext(DataContext);
+  const { theme, activeScreen } = useContext(DataContext);
 
   const showInfo = () => {
     const element = document.getElementById("moreInfoModal")!;
@@ -26,11 +22,11 @@ export default function OpenConversationHeader(props: OpenConversationHeaderProp
     <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 className="h2">
         {
-          props.activeScreen === Screen.POST 
+          activeScreen === Screen.POST 
           ? "Post"
-          : props.activeScreen === Screen.GENERAL
-          ? "General"
-          : props.activeScreen === Screen.CHAT
+          : activeScreen === Screen.GENERAL
+          ? ""
+          : activeScreen === Screen.CHAT
           ? convo.selectedConversation.groupName 
           ? convo.selectedConversation.groupName 
           : convo.selectedConversation.recipients.map(recipient => {
@@ -42,7 +38,7 @@ export default function OpenConversationHeader(props: OpenConversationHeaderProp
       </h1>
       <div className="btn-toolbar mb-2 mb-md-0">
         {
-          props.activeScreen === Screen.CHAT
+          activeScreen === Screen.CHAT
           ?<div className="btn-group me-2">
             <button type="button" 
                     className="btn btn-sm btn-outline-secondary" 
@@ -70,7 +66,7 @@ export default function OpenConversationHeader(props: OpenConversationHeaderProp
         <span data-feather="calendar"></span>More
       </button>
       {
-        props.activeScreen === Screen.CHAT
+        activeScreen === Screen.CHAT
         ? <ul className={`dropdown-menu dropdown-menu-end ${theme.title === 'dark' ? 'dropdown-menu-dark': ''}`} 
               aria-labelledby="dropdownRightMenuButton">
           <li><button className="btn dropdown-item" onClick={() => showInfo()}>
