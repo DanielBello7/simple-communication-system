@@ -22,18 +22,17 @@ export interface GroupedContact extends Contact {
 
 export type ContactsContextType = {
   state: InitialStateType,
-  dispatch: React.Dispatch<ReducerActionType>,
   selectedContact: Contact,
-  groupedContacts: {
-    groupTitle: string,
-    groupChildren: GroupedContact[],
-  }[],
+  createNewContact: (data: Contact) => void,
+  deleteContact: (data: Contact) => void,
+  updateContact: (data: Contact) => void,
+  groupedContacts: { groupTitle: string, groupChildren: GroupedContact[] }[],
   setSelectedContact: React.Dispatch<React.SetStateAction<number>>
 }
 
 export type ReducerActionType = {
   type: ContactsActions.CREATE | ContactsActions.DELETE | ContactsActions.MODIFY,
-  payload: Contact
+  payload: any
 }
 
 export const contactGroups = [

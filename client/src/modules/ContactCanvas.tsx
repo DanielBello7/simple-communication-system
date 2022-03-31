@@ -1,14 +1,13 @@
 
 
 
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import ContactScreen from "../components/dashboard/ContactScreen";
 import ComponentLoader from "../components/ComponentLoader";
 import { DataContext } from '../context/MainContext';
 
 export default function ContactCanvas() {
-  const [infoLoading, setInfoLoading] = useState(false);
-  const { theme } = useContext(DataContext);
+  const { theme, infoLoading } = useContext(DataContext);
   return (
     <div className={`offcanvas offcanvas-end shadow-lg ${theme.background}`} 
          tabIndex={-1} 

@@ -4,26 +4,31 @@
 import { useContext, useRef } from "react";
 import { DataContext } from "../context/MainContext";
 import { Modal } from "bootstrap";
+import { ContactsContext } from "../context/ContactsContext";
 
 export default function NewContactModal() {
   const emailRef = useRef<HTMLInputElement>(null);
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
-
+  
+  const { createNewContact } = useContext(ContactsContext);
   const { theme } = useContext(DataContext);
   
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const email = emailRef.current?.value;
-    const firstname = firstNameRef.current?.value;
-    const lastname = lastNameRef.current?.value;
+    const email = emailRef.current?.value as string;
+    const firstname = firstNameRef.current?.value as string;
+    const lastname = lastNameRef.current?.value as string;
+    const newContact = { email, first_name: firstname, last_name: lastname }
+
+    createNewContact(newContact);
+
     event.currentTarget.reset();
-    alert(`${email} ${firstname} ${lastname}`);
     const element = document.querySelector('#newContactModal')!;
     const modal = Modal.getOrCreateInstance(element, {backdrop: 'static'});
     modal.hide();
   }
-
+ 
   return (
     <div className="modal fade text-dark" 
          id="newContactModal" 

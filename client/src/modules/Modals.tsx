@@ -16,6 +16,8 @@ import ShareContactModal from './ShareContactModal';
 import ImageViewerModal from './ImageViewerModal';
 import UserPostsModal from './UserPostsModal';
 import ImageUploadModal from './ImageUploadModal';
+import DeleteContactModal from './DeleteContactModal';
+import ModifyContactModal from './ModifyContactModal';
 
 export default function Modals() {
   return (
@@ -34,6 +36,8 @@ export default function Modals() {
       <ImageViewerModal />
       <UserPostsModal />
       <ImageUploadModal />
+      <DeleteContactModal />
+      <ModifyContactModal />
     </React.Fragment>
   )
 }

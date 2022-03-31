@@ -8,7 +8,7 @@ import toUpperFirst from "../../lib/toUpperFirst";
 import { DataContext } from "../../context/MainContext";
 
 export default function ContactScreen() {
-  const contact = useContext(ContactsContext);
+  const { selectedContact } = useContext(ContactsContext);
   const { theme, showToast } = useContext(DataContext);
 
   return (
@@ -21,11 +21,11 @@ export default function ContactScreen() {
         width: '200px',
         height: '200px'
       }}/>
-      </div>
+      </div> 
 
       <div className="w-100 d-flex flex-column flex-grow-1" id="contact-info">
-        <h1>{`${toUpperFirst(contact.selectedContact.first_name)} ${toUpperFirst(contact.selectedContact.last_name)}`}</h1>
-        <p>{contact.selectedContact.email}</p>
+        <h1>{`${toUpperFirst(selectedContact?.first_name)} ${toUpperFirst(selectedContact?.last_name)}`}</h1>
+        <p>{selectedContact?.email}</p>
         
         <div className="btn-group btn-group-lg" role="group" aria-label="Basic outlined example">
           <button type="button" className="btn btn-outline-primary" onClick={() => showToast('Not available yet')}>
@@ -39,6 +39,18 @@ export default function ContactScreen() {
                   data-bs-toggle="modal" 
                   data-bs-target="#shareContactModal">
             <i className="fas fa-share" />
+          </button>
+          <button type="button" 
+                  className="btn btn-outline-primary" 
+                  data-bs-toggle="modal" 
+                  data-bs-target="#modifyContactModal">
+            <i className="fas fa-pen" />
+          </button>
+          <button type="button" 
+                  className="btn btn-outline-primary" 
+                  data-bs-toggle="modal" 
+                  data-bs-target="#deleteContactModal">
+            <i className="fas fa-trash" />
           </button>
         </div>
 
@@ -60,7 +72,7 @@ export default function ContactScreen() {
         <div className={`card border-primary mb-3 mt-4 ${theme.background}`} style={{maxWidth: "18rem"}}>
           <div className={`card-header ${theme.title ==='dark'?'bg-black bg-opacity-25':''}`}>Bio</div>
           <div className="card-body text-primary">
-            <h5 className="card-title">@{contact.selectedContact.email}</h5>
+            <h5 className="card-title">@{selectedContact?.email}</h5>
             <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
           </div>
         </div>
