@@ -1,7 +1,7 @@
 
 
 
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import ComponentLoader from "../ComponentLoader";
 import { DataContext } from "../../context/MainContext";
 import { UserContext } from "../../context/UserContext";
@@ -9,10 +9,9 @@ import img from '../../img/img-1.jpg';
 import toUpperFirst from "../../lib/toUpperFirst";
 
 export default function UserProfileTab() {
-  const [profileLoading, setProfileLoading] = useState(false);
-  const { theme } = useContext(DataContext);
+  const { theme, profileLoading } = useContext(DataContext);
   const { user } = useContext(UserContext);
-
+ 
   const fullname = `${toUpperFirst(user?.first_name)} ${toUpperFirst(user?.last_name)}`;
 
   if (profileLoading) return <ComponentLoader />
@@ -33,8 +32,8 @@ export default function UserProfileTab() {
       <p>{user?.bio}</p> 
       </div>
 
-      <div className="col-12 mt-4">
-        <ul className="list-group list-group-flush w-100 list-group-horizontal-lg d-flex justify-content-center" >
+      <div className="w-100 mt-4">
+        <ul className="list-group list-group-flush w-100 list-group-horizontal d-flex justify-content-center" >
           <li className={`list-group-item bg-light border-0 border-end ${theme.title==='dark'?'bg-black bg-opacity-25':'bg-light'} d-flex flex-column align-items-center justify-content-center px-4 ${theme.text}`}>
             <p className="m-0 p-0 h4 fw-bold">140</p>
             <p className="p-0 m-0" style={{fontSize: '0.7rem'}}>Contacts</p>
@@ -58,7 +57,10 @@ export default function UserProfileTab() {
                 className="btn btn-outline-primary"
                 data-bs-toggle="modal" 
                 data-bs-target="#editProfileModal">Edit Profile</button>
-        <button type="button" className="btn btn-outline-primary">Posts</button>
+        <button type="button" 
+                className="btn btn-outline-primary" 
+                data-bs-toggle="modal" 
+                data-bs-target="#userPostsModal">My Posts</button>
       </div>
       </div>
     </div>

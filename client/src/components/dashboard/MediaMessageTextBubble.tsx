@@ -53,7 +53,7 @@ export default function MediaMessageTextBubble({ sender, message, point, showMes
              id={message._id} 
              ref={point} 
              onClick={() => handleClick(message.media)}>
-        <img src={require(`../../img/${message.media}`)} alt="image"/>
+        <img src={require(`../../img/${message.media}`)} alt="user"/>
         <div className="card-footer text-end mb-0 pb-0">
         <p className="mb-0">{message.text}</p>
         <p className="mt-2 mb-0 text-muted text-end" style={{fontSize: '0.8rem'}}>{message.date.toDateString()}</p>
@@ -85,7 +85,7 @@ export default function MediaMessageTextBubble({ sender, message, point, showMes
            id={message._id} 
            ref={point} 
            onClick={() => handleClick(message.media)}>
-      <img src={require(`../../img/${message.media}`)} alt="image"/>
+      <img src={require(`../../img/${message.media}`)} alt="other"/>
       <div className="card-footer mb-0 pb-0">
       <p className="mb-0">{message.text}</p>
       <p className="mt-2 mb-0 text-muted" style={{fontSize: '0.8rem'}}>{message.date.toDateString()}</p>

@@ -3,7 +3,6 @@
 
 import { useContext } from "react";
 import { DataContext } from "../../context/MainContext";
-import { Screen } from "../../types/GeneralTypes.types";
 import { PostsContext } from "../../context/PostsContext";
 import CommentInput from "./CommentInput";
 import ComponentLoader from "../ComponentLoader";
@@ -13,7 +12,7 @@ import TextPost from "./TextPost";
 import { PostType } from "../../types/PostType.type";
 
 export default function GeneralScreen() {
-  const { theme, setActiveScreen, commentsLoading, postLoading } = useContext(DataContext);
+  const { theme, commentsLoading, postLoading } = useContext(DataContext);
   const { activePost } = useContext(PostsContext);
 
   const comments = activePost?.comments.map((comment, index) => {
@@ -22,12 +21,6 @@ export default function GeneralScreen() {
 
   return (
     <div className={`w-100 h-100 overflow-hidden d-flex flex-column mb-3 ${theme.title === 'dark'?'border-black':''}`}>
-      <div className="w-100">
-      <button className={`btn ${theme.text}`} 
-              onClick={() => setActiveScreen(Screen.CHAT)}><i className="fas fa-arrow-left" /> Back
-      </button>
-      </div>
-
       <div className="w-100 d-flex flex-column flex-grow-1 overflow-scroll">
         <div className={`w-100 d-flex h-100 flex-row mb-0 ${theme.title === 'dark'?'border-black':'border'}`}>
             <div className="col-12 col-lg-8 h-100 overflow-scroll p-1">

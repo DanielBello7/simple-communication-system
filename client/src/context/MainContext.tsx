@@ -40,7 +40,9 @@ type DataContextType = {
   postLoading: boolean,
   setPostLoading: React.Dispatch<React.SetStateAction<boolean>>,
   modalImage: string | null,
-  setModalImage:  React.Dispatch<React.SetStateAction<string | null>>
+  setModalImage:  React.Dispatch<React.SetStateAction<string | null>>,
+  profileLoading: boolean,
+  setProfileLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const address = "http://localhost:5050";
@@ -61,6 +63,7 @@ export function DataContextProvider(props: DataContextProps) {
   const [commentsLoading, setCommentsLoading] = useState(false);
   const [postLoading, setPostLoading] = useState(false);
   const [modalImage, setModalImage] = useState<string | null>(null);
+  const [profileLoading, setProfileLoading] = useState(false);
 
   if (isLight) {
     document.body.classList.remove(`${DarkTheme.text}`);
@@ -94,6 +97,8 @@ export function DataContextProvider(props: DataContextProps) {
     <DataContext.Provider value={{
       isLoading,
       setLoading,
+      profileLoading,
+      setProfileLoading,
       postLoading,
       setPostLoading,
       commentsLoading,

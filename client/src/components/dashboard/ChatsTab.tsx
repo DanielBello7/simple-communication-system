@@ -7,14 +7,14 @@ import { ConversationsContext } from '../../context/ConversationsContext';
 import { ContactsContext } from '../../context/ContactsContext';
 import toUpperFirst from '../../lib/toUpperFirst';
 import img from '../../img/img-1.jpg';
-import img1 from '../../img/users.svg'
+import img1 from '../../img/user-group.svg'
 import { UserContext } from '../../context/UserContext';
 import ComponentLoader from '../ComponentLoader';
 import { DataContext } from '../../context/MainContext';
 
 
 export default function Chats() {
-  const conversationsContext = useContext(ConversationsContext);
+  const { state, setSelectedConversation, formattedConversations } = useContext(ConversationsContext);
   const contacts = useContext(ContactsContext);
   const userContext = useContext(UserContext);
   const [selected, setSelected] = useState<number | null>(null);
@@ -23,10 +23,10 @@ export default function Chats() {
   const handleClick = (chat: number) => {
     setActiveScreen(Screen.CHAT);
     setSelected(chat)
-    conversationsContext.setSelectedConversation(chat);
+    setSelectedConversation(chat);
   }
 
-  const chatsOutput = conversationsContext.formattedConversations.map((chat, index) => {
+  const chatsOutput = formattedConversations.map((chat, index) => {
     return (
       <div className={`${theme.background} card mb-3 col-11 rounded-3 chat-box-2`} 
            style={{height: '95px', fontSize: '0.9rem'}} 
@@ -93,11 +93,11 @@ export default function Chats() {
             <span className='col-3 text-end'>
               {
                 chat.messages.map((message, index) => {
-                  if (index === (chat.messages.length -1))
-                    {
-                      if (message.isDelivered) return <i className='fas fa-check-circle' key={index} />
-                      else return <i className='fas fa-clock' key={index} />
-                    }
+                  if (index === (chat.messages.length -1)){
+                    if (message.isDelivered) return <i className='fas fa-check-circle' key={index} />
+                    else return <i className='fas fa-clock' key={index} />
+                  }
+                  return null
                 })
               }
             </span>
@@ -112,7 +112,8 @@ export default function Chats() {
   return (
     <ul className="nav w-100 h-100 d-flex flex-column overflow-scroll" id="scroll-container">
       { chatsLoading ? <ComponentLoader /> : chatsOutput }
-      <div className={`position-sticky w-100 ${conversationsContext.state.length > 6 ? 'bottom-0' : 'top-100'} end-0`}>
+      
+      <div className={`position-sticky w-100 ${state.length < 6 ? 'top-100' : 'bottom-0'} end-0`}>
       <button className='btn bg-primary mb-3 mx-2 shadow rounded-circle p-0 text-white' 
               style={{width: '50px', height: '50px'}}
               data-bs-toggle="modal" 

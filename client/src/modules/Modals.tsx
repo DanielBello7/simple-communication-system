@@ -14,6 +14,8 @@ import DeleteConversationModal from './DeleteConversationModal';
 import SharePostModal from './SharePostModal';
 import ShareContactModal from './ShareContactModal';
 import ImageViewerModal from './ImageViewerModal';
+import UserPostsModal from './UserPostsModal';
+import ImageUploadModal from './ImageUploadModal';
 
 export default function Modals() {
   return (
@@ -30,6 +32,8 @@ export default function Modals() {
       <SharePostModal />
       <ShareContactModal />
       <ImageViewerModal />
+      <UserPostsModal />
+      <ImageUploadModal />
     </React.Fragment>
   )
 }

@@ -71,16 +71,26 @@ export default function ChatScreen() {
                 id="floatingTextarea2" 
                 required
                 ref={textRef}
-                style={{height: "100px", color: 'grey'}}>
+                style={{height: "60px", color: 'grey'}}>
       </textarea>
-      <label htmlFor="floatingTextarea2 text-truncate" id="label-header">
+      <label htmlFor="floatingTextarea2 text-truncate" 
+             id="label-header" 
+             className="p-2 mt-1" 
+             style={{fontSize: '0.8rem'}}>
         <span className="text-truncate">
         { !replyMsg ? 'Write Something...' : `Replying: ${replyMessage?.text || "Message"}` }
         </span>
       </label>
       </div>
-      <button className={`btn btn-outline-black ${theme.text} ${theme.title==='dark'&&'bg-primary'} chat-sub-but`}>
+      <button className={`btn btn-outline-black me-2 ${theme.text} ${theme.title==='dark'&&'bg-primary'} chat-sub-but`}>
       <i className="fas fa-paper-plane fa-lg"/>  
+      </button>
+
+      <button type="button" 
+              data-bs-toggle="modal" 
+              data-bs-target="#imageUploadModal" 
+              className={`btn btn-outline-black ${theme.text} ${theme.title==='dark'&&'bg-primary'} chat-sub-but`}>
+      <i className="fas fa-camera fa-lg"/>  
       </button>
       </form>
       </div>
