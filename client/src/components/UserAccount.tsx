@@ -10,7 +10,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { Route, Routes } from 'react-router-dom';
 
-export default function UserAccount() {
+function UserAccount() {
   return (
     <React.Fragment>
     <Header />
@@ -24,3 +24,5 @@ export default function UserAccount() {
     </React.Fragment>
   );
 }
+
+export default React.memo(UserAccount);

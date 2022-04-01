@@ -44,4 +44,4 @@ function App() {
     </React.Fragment>
   );
 }
-export default App;
+export default React.memo(App);
