@@ -74,7 +74,7 @@ export type ConversationsContextPropsType = {
 
 export type ReducerActionType = {
   type: ConversationActions.CREATE_CONVERSATION | ConversationActions.DELETE_CONVERSATION | ConversationActions.ADD_MESSAGE | ConversationActions.DELETE_MESSAGE,
-  payload: string,
+  payload: any,
   message?: MainMessage,
 }
 
@@ -83,5 +83,6 @@ export type ConversationsContextType = {
   dispatch: React.Dispatch<ReducerActionType>,
   formattedConversations: Conversation[],
   selectedConversation: Conversation,
-  setSelectedConversation: React.Dispatch<React.SetStateAction<number>>
+  setSelectedConversation: React.Dispatch<React.SetStateAction<number>>,
+  NewConversation: (data: string[]) => void
 }

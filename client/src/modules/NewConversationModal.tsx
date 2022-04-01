@@ -6,6 +6,7 @@ import { ContactsContext } from "../context/ContactsContext";
 import { DataContext } from "../context/MainContext";
 import toUpperFirst from "../lib/toUpperFirst";
 import { Modal } from 'bootstrap';
+import { ConversationsContext } from '../context/ConversationsContext';
 
 let selectedContacts: string[] = [];
 
@@ -14,6 +15,7 @@ export default function NewConversationModal() {
   const { showToast, theme } = useContext(DataContext);
   const [show, setShow] = useState(false);
   const groupNameRef = useRef<HTMLInputElement>(null);
+  const { NewConversation } = useContext(ConversationsContext);
 
   const closeModal = () => {
     const element = document.getElementById("newConversationModal")!;
@@ -40,7 +42,7 @@ export default function NewConversationModal() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     if (selectedContacts.length <= 0) return showToast('Nothing selected');
-    showToast('Contacts Selected');
+    NewConversation(selectedContacts);
     selectedContacts = [];
     setShow(false);
     event.currentTarget.reset();

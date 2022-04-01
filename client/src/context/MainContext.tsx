@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { DarkTheme, LightTheme, Theme } from '../modules/Themes';
 import { Modal, Toast } from 'bootstrap';
 import { Screen, Tabs } from '../types/GeneralTypes.types';
+import { Message, PostMessage, ContactMessage } from '../types/ConversationTypes.types';
 
 type DataContextProps = {
   children: React.ReactNode
@@ -44,7 +45,9 @@ type DataContextType = {
   profileLoading: boolean,
   setProfileLoading: React.Dispatch<React.SetStateAction<boolean>>
   infoLoading: boolean,
-  setInfoLoading: React.Dispatch<React.SetStateAction<boolean>>
+  setInfoLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  replyMsg: Message | PostMessage | ContactMessage | null,
+  setReplyMsg: React.Dispatch<React.SetStateAction<Message | PostMessage | ContactMessage | null>>
 }
 
 const address = "http://localhost:5050";
@@ -67,6 +70,8 @@ export function DataContextProvider(props: DataContextProps) {
   const [modalImage, setModalImage] = useState<string | null>(null);
   const [profileLoading, setProfileLoading] = useState(false);
   const [infoLoading, setInfoLoading] = useState(false);
+
+  const [replyMsg, setReplyMsg] = useState<Message | PostMessage | ContactMessage | null>(null);
 
   if (isLight) {
     document.body.classList.remove(`${DarkTheme.text}`);
@@ -99,6 +104,8 @@ export function DataContextProvider(props: DataContextProps) {
   return (
     <DataContext.Provider value={{
       isLoading,
+      replyMsg, 
+      setReplyMsg,
       setLoading,
       profileLoading,
       setProfileLoading,

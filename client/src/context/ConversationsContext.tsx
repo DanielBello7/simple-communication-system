@@ -1,7 +1,7 @@
 
 
 
-import React, { useContext, useReducer, useState } from 'react';
+import React, { Suspense, useContext, useReducer, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { 
   InitialStateType,
@@ -21,7 +21,7 @@ function reducer(state: InitialStateType, action: ReducerActionType) {
     case ConversationActions.CREATE_CONVERSATION:
       const newConversation: Conversation = {
         _id: uuid(),
-        recipients: [],
+        recipients: [...action.payload],
         messages: []
       }
       return [...state, newConversation];
@@ -76,11 +76,16 @@ export function ConversationsContextProvider(props: ConversationsContextPropsTyp
     return {...conversation, recipients, messages}
   });
 
+  function NewConversation(data: string[]) {
+    dispatch({type: ConversationActions.CREATE_CONVERSATION, payload: data});
+  }
+
   return (
     <ConversationsContext.Provider value={{
         state, 
         dispatch, 
         formattedConversations,
+        NewConversation,
         setSelectedConversation,
         selectedConversation: formattedConversations[selectedConversation]
       }}>

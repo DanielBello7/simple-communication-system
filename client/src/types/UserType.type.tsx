@@ -8,11 +8,18 @@ export type UserType = {
   last_name: string
 }
 
+export type UpdateType = {
+  firstname: string, 
+  lastname: string, 
+  bio: string
+}
+
 export type UserContextType = {
   user: UserType | null,
   LoginUser: Function,
   LogoutUser: Function,
-  createAccount: Function
+  createAccount: Function,
+  UpdateUserInfo: (data: UpdateType) => void
 }
 
 export type UserData = {

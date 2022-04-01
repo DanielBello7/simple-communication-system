@@ -1,19 +1,17 @@
 
  
  
-import { useContext, useRef, useState, useCallback } from "react";
+import { useContext, useRef, useState, useCallback, useEffect } from "react";
 import TextBubble from "./TextBubble"
 import ComponentLoader from "../ComponentLoader";
 import { DataContext } from "../../context/MainContext";
 import { ConversationsContext } from "../../context/ConversationsContext";
-import { ContactMessage, Message, PostMessage } from '../../types/ConversationTypes.types';
 
 
 export default function ChatScreen() {
-  const [replyMsg, setReplyMsg] = useState<Message | PostMessage | ContactMessage | null>(null);
   const textRef = useRef<HTMLTextAreaElement>(null);
   const { selectedConversation } = useContext(ConversationsContext);
-  const { theme, chatLoading } = useContext(DataContext);
+  const { theme, chatLoading, replyMsg, setReplyMsg } = useContext(DataContext);
 
 
   const setRef = useCallback((node): void => {
@@ -52,6 +50,11 @@ export default function ChatScreen() {
 
   let replyMessage = selectedConversation.messages.find(msg => msg._id === replyMsg?._id);
 
+  useEffect(() => {
+    const form = document.getElementById("mainTextForm") as HTMLFormElement;
+    form.reset();
+  }, []);
+
   return (
     <div className="w-100 h-100 mb-3 d-flex flex-column" id="chat-window">
       <div className="w-100 d-flex mb-1 flex-column flex-grow-1 overflow-scroll" id="main-window">
@@ -64,7 +67,9 @@ export default function ChatScreen() {
         ? <span id="close-reply" onClick={() => setReplyMsg(null)}>Clear</span>
         : null
       }
-      <form className={`w-100 d-flex ${theme.title==='dark'?'':'border'} rounded-3`} onSubmit={handleSubmit}>
+      <form className={`w-100 d-flex ${theme.title==='dark'?'':'border'} rounded-3`} 
+            onSubmit={handleSubmit}
+            id="mainTextForm">
       <div className="form-floating w-100">
       <textarea className={`form-control border-0 ${theme.title==='dark'?'bg-black bg-opacity-25':''}`} 
                 placeholder="Write Something..." 

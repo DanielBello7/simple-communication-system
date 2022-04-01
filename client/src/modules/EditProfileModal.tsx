@@ -6,28 +6,27 @@ import { Modal } from 'bootstrap';
 import { UserContext } from '../context/UserContext';
 import { DataContext } from '../context/MainContext';
 import toUpperFirst from '../lib/toUpperFirst';
+import { UpdateType } from '../types/UserType.type';
 
 export default function EditProfileModal() {
   const firstnameRef = useRef<HTMLInputElement>(null)!;
   const lastnameRef = useRef<HTMLInputElement>(null);
   const bioRef = useRef<HTMLTextAreaElement>(null);
-  const { user } = useContext(UserContext);
+  const { user, UpdateUserInfo } = useContext(UserContext);
   const { theme } = useContext(DataContext);
-
-  const handleClick = (): void => {
-    const firstname = firstnameRef.current?.value;
-    const lastname = lastnameRef.current?.value;
-    const bio = bioRef.current?.value;
-    alert(`${firstname} ${lastname} ${bio}`);
-    const element = document.getElementById("editProfileModal")!;
-    const modal = Modal.getOrCreateInstance(element);
-    modal.hide();
-  }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const element = document.getElementById("editProfileModal")!;
     const modal = Modal.getOrCreateInstance(element);
+
+    const firstname = firstnameRef.current?.value as string;
+    const lastname = lastnameRef.current?.value as string;
+    const bio = bioRef.current?.value as string;
+    
+    const data: UpdateType = {firstname, lastname, bio}
+    UpdateUserInfo(data);
+
     event.currentTarget.reset();
     modal.hide();
   }
@@ -85,11 +84,11 @@ export default function EditProfileModal() {
       </form>
       </div>
       <div className="modal-footer">
-        <button type="submit" 
-                className="btn btn-secondary"
-                form='editProfileForm'>Close</button>
         <button type="button" 
-                onClick={handleClick}
+                data-bs-dismiss="modal"
+                className="btn btn-secondary">Close</button>
+        <button type="submit"
+                form='editProfileForm'
                 className="btn btn-primary">Update</button>
       </div>
   </div>

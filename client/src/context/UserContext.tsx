@@ -4,7 +4,7 @@
 import React, { useContext } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { DataContext } from './MainContext';
-import { UserContextType, UserData, UserType } from '../types/UserType.type';
+import { UpdateType, UserContextType, UserData, UserType } from '../types/UserType.type';
 
 type UserContextProps = {
   children: React.ReactNode
@@ -14,10 +14,10 @@ export const UserContext = React.createContext<UserContextType>({} as UserContex
 
 export function UserContextProvider(props: UserContextProps){
   const [user, setUser] = useLocalStorage<UserType | null>('user', null);
-  const dataContext = useContext(DataContext);
+  const { setLoading, showAlert, showToast, theme, changeTheme, } = useContext(DataContext);
 
   function LoginUser(email: string, password: string): void {
-    dataContext.setLoading(true);
+    setLoading(true);
     const userData: UserType = { 
       email: email, 
       password: password, 
@@ -26,20 +26,34 @@ export function UserContextProvider(props: UserContextProps){
       last_name: 'Bello' 
     }
     setUser(userData);
-    return dataContext.setLoading(false);
+    return setLoading(false);
   }
 
   function LogoutUser(): void {
-    dataContext.setLoading(true);
+    setLoading(true);
     setUser(null);
-    if (dataContext.theme.title === 'dark') dataContext.changeTheme();
-    return dataContext.setLoading(false);
+    if (theme.title === 'dark') changeTheme();
+    return setLoading(false);
+  }
+
+  function UpdateUserInfo(data: UpdateType): void {
+    setLoading(true)
+    setUser((prevState: UserType) => {
+      return {
+        ...prevState, 
+        first_name: data.firstname, 
+        last_name: data.lastname,
+        bio: data.bio
+      }
+    })
+    showToast('Account Updated');
+    setLoading(false);
   }
 
   function createAccount(data: UserData): void {
-    dataContext.setLoading(true);
-    dataContext.showAlert('Gotten');
-    return dataContext.setLoading(false);
+    setLoading(true);
+    showAlert('Gotten');
+    return setLoading(false);
   }
 
   return (
@@ -47,6 +61,7 @@ export function UserContextProvider(props: UserContextProps){
       user, 
       LoginUser, 
       LogoutUser,
+      UpdateUserInfo,
       createAccount
     }}>
       {props.children}

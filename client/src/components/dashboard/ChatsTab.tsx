@@ -18,12 +18,15 @@ export default function Chats() {
   const contacts = useContext(ContactsContext);
   const userContext = useContext(UserContext);
   const [selected, setSelected] = useState<number | null>(null);
-  const { theme, setActiveScreen, chatsLoading } = useContext(DataContext);
+  const { theme, setActiveScreen, chatsLoading, setReplyMsg } = useContext(DataContext);
 
   const handleClick = (chat: number) => {
     setActiveScreen(Screen.CHAT);
     setSelected(chat)
     setSelectedConversation(chat);
+    const form = document.getElementById("mainTextForm") as HTMLFormElement;
+    if (form) form.reset();
+    setReplyMsg(null);
   }
 
   const chatsOutput = formattedConversations.map((chat, index) => {
