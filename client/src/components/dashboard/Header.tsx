@@ -25,7 +25,7 @@ export default function Header(){
     <header className={`navbar navbar-dark ${dataContext.theme.background} flex-md-nowrap p-0 shadow`} 
             style={headerStyle}>
 		<p className={`navbar-brand col-md-4 col-lg-3 me-0 px-3 m-0 py-2 text-white bg-dark`} 
-       style={headerStyle}>inScript Connect
+       style={headerStyle}>Social Connect
     </p>
 		<button className="navbar-toggler position-absolute d-md-none collapsed" 
 						type="button" 

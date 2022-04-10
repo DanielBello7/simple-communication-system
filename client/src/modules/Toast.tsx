@@ -17,7 +17,7 @@ export default function Toast() {
          aria-atomic="true">
       <div className="toast-header bg-primary text-white">
         <img src={require('../img/logo.png')} width="30px" height="30px" className="rounded me-2" alt="logo" />
-        <strong className="me-auto">inScript</strong>
+        <strong className="me-auto">Social Connect</strong>
         <small>now</small>
         <button type="button" 
                 className="btn-close white" 

@@ -1,13 +1,7 @@
 {
   "short_name": "inScript Connect",
   "name": "inScript Connect",
-  "icons": [
-    {
-      "src": "logo.png",
-      "sizes": "64x64",
-      "type": "image/png"
-    }
-  ],
+  "icons": [],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
