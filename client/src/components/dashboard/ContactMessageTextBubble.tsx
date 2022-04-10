@@ -3,7 +3,8 @@
 
 import { useContext } from "react";
 import { DataContext } from "../../context/MainContext";
-import img from '../../img/IMG_2135.JPG';
+import img from '../../img/img-1.jpg';
+// import img from '../../img/IMG_2135.JPG';
 import toUpperFirst from "../../lib/toUpperFirst";
 import { ContactsContext } from "../../context/ContactsContext";
 import { 
