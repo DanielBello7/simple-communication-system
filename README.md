@@ -1,2 +1,3 @@
 # simple-communication-system
- Basically a text app with fancy words and a different ui
+
+An frontend implementation of a simple design for a social media application with everything fully outlined, using bootstrap 5 as the base styling system.
